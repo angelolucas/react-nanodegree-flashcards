@@ -4,9 +4,7 @@ import styled from 'styled-components'
 import Deck from './Deck'
 
 const ListDeks = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 5px;
+  flex-direction: column;
 `
 
 class Home extends Component {
