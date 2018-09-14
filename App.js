@@ -1,21 +1,24 @@
 import React from 'react'
+import { createStackNavigator } from 'react-navigation'
+import { View } from 'react-native'
 import Home from './src/components/Home'
-import styled from 'styled-components'
-import { colors } from './src/theme'
-import StatusBar from './src/components/StatusBar'
+import NewDeck from './src/components/NewDeck'
 
-const Root = styled.View`
-  flex: 1;
-  background-color: ${colors.light};
-`
+const Stack = createStackNavigator({
+  Home: { screen: Home },
+  NewDeck: {
+    screen: NewDeck,
+
+    navigationOptions: () => ({ title: 'New Deck' }),
+  },
+})
 
 export default class App extends React.Component {
   render() {
     return (
-      <Root>
-        <StatusBar />
-        <Home />
-      </Root>
+      <View style={{ flex: 1 }}>
+        <Stack />
+      </View>
     )
   }
 }
