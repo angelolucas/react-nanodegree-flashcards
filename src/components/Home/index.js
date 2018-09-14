@@ -6,11 +6,22 @@ import Deck from './Deck'
 const ListDeks = styled.View`
   flex-direction: column;
 `
+const NewDeckButton = styled.Text`
+  font-size: 20px;
+  padding: 10px;
+  text-align: right;
+  color: #4285f4;
+`
 
 class Home extends Component {
+  newDeck() {
+    console.log('log')
+  }
+
   render() {
     return (
       <ScrollView>
+        <NewDeckButton onPress={this.newDeck}>New Deck</NewDeckButton>
         <ListDeks>
           <Deck title="English" length="10" />
           <Deck title="React" length="15" />
