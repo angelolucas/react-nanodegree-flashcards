@@ -16,27 +16,27 @@ const NewDeckButton = styled.Text`
 
 class Home extends Component {
   render() {
+    const { navigate } = this.props.navigation
+
     return (
       <ScrollView>
-        <NewDeckButton
-          onPress={() => this.props.navigation.navigate('NewDeck')}
-        >
+        <NewDeckButton onPress={() => navigate('NewDeck')}>
           New Deck
         </NewDeckButton>
 
         <ListDeks>
-          <Deck title="English" length="10" />
-          <Deck title="React" length="15" />
-          <Deck title="ES6" length="0" />
-          <Deck title="Spanish" length="3" />
-          <Deck title="React" length="8" />
-          <Deck title="Countries" length="30" />
+          <Deck title="English" length="10" navigate={navigate} />
+          <Deck title="React" length="15" navigate={navigate} />
+          <Deck title="ES6" length="0" navigate={navigate} />
+          <Deck title="Spanish" length="3" navigate={navigate} />
+          <Deck title="React" length="8" navigate={navigate} />
+          <Deck title="Countries" length="30" navigate={navigate} />
           <Deck title="UStates" length="90" />
-          <Deck title="Brasilian States" length="4" />
-          <Deck title="Ukulele" length="55" />
-          <Deck title="English" length="13" />
-          <Deck title="React" length="43" />
-          <Deck title="Ukulele" length="20" />
+          <Deck title="Brasilian States" length="4" navigate={navigate} />
+          <Deck title="Ukulele" length="55" navigate={navigate} />
+          <Deck title="English" length="13" navigate={navigate} />
+          <Deck title="React" length="43" navigate={navigate} />
+          <Deck title="Ukulele" length="20" navigate={navigate} />
         </ListDeks>
       </ScrollView>
     )
