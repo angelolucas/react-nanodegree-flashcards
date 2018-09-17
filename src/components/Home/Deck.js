@@ -27,16 +27,17 @@ class Deck extends Component {
     },
   ]
   render() {
-    console.log(this.props)
+    const { title, length } = this.props
+
     return (
       <Root>
         <Swipeout right={this.swipeoutBtns} backgroundColor="transparent">
           <TouchableWithoutFeedback
-            onPress={() => this.props.navigate('Cards')}
+            onPress={() => this.props.navigate('Cards', { title: title })}
           >
             <Card>
-              <Title>{this.props.title}</Title>
-              <Length>{this.props.length}</Length>
+              <Title>{title}</Title>
+              <Length>{length}</Length>
             </Card>
           </TouchableWithoutFeedback>
         </Swipeout>

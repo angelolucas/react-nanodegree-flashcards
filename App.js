@@ -12,7 +12,14 @@ const Stack = createStackNavigator({
 
     navigationOptions: () => ({ title: 'New Deck' }),
   },
-  Cards: { screen: Cards },
+  Cards: {
+    screen: Cards,
+    navigationOptions: ({ navigation }) => {
+      const title = navigation.state.params.title
+
+      return { title }
+    },
+  },
 })
 
 export default class App extends React.Component {
