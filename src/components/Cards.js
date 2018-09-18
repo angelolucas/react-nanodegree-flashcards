@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import styled from 'styled-components'
+import CardFlip from 'react-native-card-flip'
 
 class Cards extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <QuestionCard>
-          <Counter>1/10</Counter>
-          <Question>Dos React Native work with Android?</Question>
-        </QuestionCard>
+        <CardContainer>
+          <CardFlip
+            style={styles.cardContainer}
+            ref={card => (this.card = card)}
+          >
+            <Card onPress={() => this.card.flip()}>
+              <Text height={{ backgroundColor: 'red' }}>AB</Text>
+            </Card>
+            <Card onPress={() => this.card.flip()}>
+              <Text height={{ backgroundColor: 'blue' }}>CD</Text>
+            </Card>
+          </CardFlip>
+        </CardContainer>
         <AnswerContainer>
           <Answer>Incorrect</Answer>
           <Answer>Correct</Answer>
@@ -19,24 +29,16 @@ class Cards extends Component {
   }
 }
 
-const QuestionCard = styled.View`
-  background: white;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
+const styles = StyleSheet.create({ cardContainer: { height: '100%' } })
+
+const CardContainer = styled.View`
   flex: auto;
-  justify-content: space-around;
 `
 
-const Counter = styled.Text`
-  flex: 1;
-  text-align: right;
-`
-
-const Question = styled.Text`
-  font-size: 32px;
-  text-align: center;
-  flex: 1;
+const Card = styled.TouchableOpacity`
+  background-color: white;
+  margin: 10px;
+  height: 100%;
 `
 
 const AnswerContainer = styled.View`
