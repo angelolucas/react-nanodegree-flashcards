@@ -44,9 +44,13 @@ class Cards extends Component {
               correctAnswer ? styles.correct : styles.incorrect,
             ]}
           >
-            <Text height={{ backgroundColor: 'blue' }}>
-              {correctAnswer ? <Text>Correct!</Text> : <Text>Incorrect!</Text>}
-            </Text>
+            <View style={styles.resultContainer}>
+              {correctAnswer ? (
+                <Text style={styles.result}>Correct!</Text>
+              ) : (
+                <Text style={styles.result}>Incorrect!</Text>
+              )}
+            </View>
             <View style={styles.navButtons}>
               <Text style={styles.button} onPress={() => this.card.flip()}>
                 Next
@@ -95,9 +99,19 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
 
-  correct: { backgroundColor: 'green' },
+  resultContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 
-  incorrect: { backgroundColor: 'red' },
+  result: {
+    fontSize: 38,
+    textAlign: 'center',
+  },
+
+  correct: { backgroundColor: '#87D86B' },
+
+  incorrect: { backgroundColor: '#DB3D35' },
 })
 
 export default Cards
