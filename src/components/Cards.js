@@ -1,58 +1,103 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import styled from 'styled-components'
 import CardFlip from 'react-native-card-flip'
 
 class Cards extends Component {
+  state = { correctAnswer: false }
+
   render() {
+    const { correctAnswer } = this.state
+
     return (
-      <View style={{ flex: 1 }}>
-        <CardContainer>
-          <CardFlip
-            style={styles.cardContainer}
-            ref={card => (this.card = card)}
+      <View style={styles.root}>
+        <CardFlip style={styles.cardContainer} ref={card => (this.card = card)}>
+          <View style={styles.card}>
+            <View style={styles.questionContainer}>
+              <Text style={styles.question}>
+                Dos React Native work with Android?
+              </Text>
+            </View>
+            <View style={styles.navButtons}>
+              <Text
+                style={styles.button}
+                onPress={() => {
+                  this.setState({ correctAnswer: true })
+                  this.card.flip('incorrect')
+                }}
+              >
+                Incorrect
+              </Text>
+              <Text
+                style={styles.button}
+                onPress={() => {
+                  this.setState({ correctAnswer: false })
+                  this.card.flip('correct')
+                }}
+              >
+                Correct
+              </Text>
+            </View>
+          </View>
+          <View
+            style={[
+              styles.card,
+              correctAnswer ? styles.correct : styles.incorrect,
+            ]}
           >
-            <Card onPress={() => this.card.flip()}>
-              <Text height={{ backgroundColor: 'red' }}>AB</Text>
-            </Card>
-            <Card onPress={() => this.card.flip()}>
-              <Text height={{ backgroundColor: 'blue' }}>CD</Text>
-            </Card>
-          </CardFlip>
-        </CardContainer>
-        <AnswerContainer>
-          <Answer>Incorrect</Answer>
-          <Answer>Correct</Answer>
-        </AnswerContainer>
+            <Text height={{ backgroundColor: 'blue' }}>
+              {correctAnswer ? <Text>Correct!</Text> : <Text>Incorrect!</Text>}
+            </Text>
+            <View style={styles.navButtons}>
+              <Text style={styles.button} onPress={() => this.card.flip()}>
+                Next
+              </Text>
+            </View>
+          </View>
+        </CardFlip>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({ cardContainer: { height: '100%' } })
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    padding: 10,
+    marginBottom: 30,
+  },
 
-const CardContainer = styled.View`
-  flex: auto;
-`
+  cardContainer: { height: '100%' },
 
-const Card = styled.TouchableOpacity`
-  background-color: white;
-  margin: 10px;
-  height: 100%;
-`
+  card: {
+    borderRadius: 5,
+    backgroundColor: 'white',
+    height: '100%',
+  },
 
-const AnswerContainer = styled.View`
-  flex-direction: row;
-  margin: 25px 0;
-`
+  questionContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
 
-const Answer = styled.Text`
-  border-color: black;
-  border-width: 1px;
-  flex: 1;
-  margin: 10px;
-  text-align: center;
-  font-size: 28px;
-`
+  question: {
+    fontSize: 38,
+    textAlign: 'center',
+  },
+
+  navButtons: { flexDirection: 'row' },
+
+  button: {
+    borderColor: 'black',
+    borderWidth: 1,
+    flex: 1,
+    margin: 10,
+    textAlign: 'center',
+    fontSize: 28,
+  },
+
+  correct: { backgroundColor: 'green' },
+
+  incorrect: { backgroundColor: 'red' },
+})
 
 export default Cards

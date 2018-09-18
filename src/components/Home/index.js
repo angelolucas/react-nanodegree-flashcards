@@ -6,6 +6,7 @@ import Deck from './Deck'
 
 const ListDeks = styled.View`
   flex-direction: column;
+  margin-bottom: 30px;
 `
 const NewDeckButton = styled.Text`
   font-size: 20px;
