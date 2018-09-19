@@ -50,17 +50,20 @@ const Root = styled.View`
   flex: 1 1 150px;
   margin-bottom: 5px;
 `
+
 const Card = styled.View`
-  background-color: white;
+  border-bottom-color: #ccc;
+  border-bottom-width: 1px;
+  flex-direction: row;
   padding: 15px;
   margin: 5px 10px 5px;
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  justify-content: center;
+  justify-content: space-between;
   z-index: 1;
 `
 const Title = styled.Text`
-  font-size: 30px;
+  font-size: 24px;
   margin-bottom: 5px;
 `
 const Length = styled.Text`

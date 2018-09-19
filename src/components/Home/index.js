@@ -4,17 +4,6 @@ import { ScrollView } from 'react-native'
 import styled from 'styled-components'
 import Deck from './Deck'
 
-const ListDeks = styled.View`
-  flex-direction: column;
-  margin-bottom: 30px;
-`
-const NewDeckButton = styled.Text`
-  font-size: 20px;
-  padding: 10px;
-  text-align: right;
-  color: #4285f4;
-`
-
 class Home extends Component {
   render() {
     const { navigate } = this.props.navigation
@@ -43,6 +32,16 @@ class Home extends Component {
     )
   }
 }
+
+const ListDeks = styled.View`
+  margin-bottom: 30px;
+`
+const NewDeckButton = styled.Text`
+  font-size: 20px;
+  padding: 10px;
+  text-align: right;
+  color: #4285f4;
+`
 
 Home.propTypes = { navigation: PropTypes.object }
 
