@@ -6,9 +6,12 @@ class Cards extends Component {
   render() {
     return (
       <ScrollView>
-        <Card question="Dos React Native work with Android?" answer={true} />
         <Card
-          question="Lhasa Apsos were used by monks for protection"
+          question="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's."
+          answer={true}
+        />
+        <Card
+          question="Lhasa Apsos were used by monks for protection."
           answer={true}
         />
         <Card

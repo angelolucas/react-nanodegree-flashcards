@@ -33,7 +33,7 @@ class Deck extends Component {
       <Root>
         <Swipeout right={this.swipeoutBtns} backgroundColor="transparent">
           <TouchableWithoutFeedback
-            onPress={() => this.props.navigate('Cards', { title: title })}
+            onPress={() => this.props.navigate('Cards', { title })}
           >
             <Card>
               <Title>{title}</Title>

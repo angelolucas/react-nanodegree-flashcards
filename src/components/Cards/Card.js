@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Text } from 'react-native'
-import CardFlip from 'react-native-card-flip'
+import FlipCard from './FlipCard'
 
 class Card extends Component {
   state = { correctAnswer: false }
@@ -19,7 +19,7 @@ class Card extends Component {
 
     return (
       <View style={styles.root}>
-        <CardFlip style={styles.CardFlip} ref={card => (this.card = card)}>
+        <FlipCard style={styles.CardFlip} ref={card => (this.card = card)}>
           <View style={styles.front}>
             <Text style={styles.question}>{question}</Text>
 
@@ -46,16 +46,19 @@ class Card extends Component {
               <Text style={styles.result}>Incorrect!</Text>
             )}
           </View>
-        </CardFlip>
+        </FlipCard>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  root: { padding: 20 },
+  root: {
+    padding: 20,
+    marginBottom: 5,
+  },
 
-  CardFlip: { height: '100%' },
+  CardFlip: {},
 
   front: {
     backgroundColor: 'white',
@@ -65,6 +68,7 @@ const styles = StyleSheet.create({
   back: {
     borderRadius: 5,
     padding: 20,
+    position: 'absolute',
   },
 
   question: {
