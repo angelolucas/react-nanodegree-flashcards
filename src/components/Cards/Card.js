@@ -18,47 +18,37 @@ class Card extends Component {
     const { question } = this.props
 
     return (
-      <View style={styles.root}>
-        <FlipCard style={styles.CardFlip} ref={card => (this.card = card)}>
-          <View style={styles.front}>
-            <Text style={styles.question}>{question}</Text>
+      <FlipCard style={styles.root} ref={card => (this.card = card)}>
+        <View style={styles.front}>
+          <Text style={styles.question}>{question}</Text>
 
-            <View style={styles.navButtons}>
-              <Text
-                style={styles.button}
-                onPress={() => this.handleAnswer(false)}
-              >
-                False
-              </Text>
-              <Text
-                style={styles.button}
-                onPress={() => this.handleAnswer(true)}
-              >
-                True
-              </Text>
-            </View>
+          <View style={styles.navButtons}>
+            <Text
+              style={styles.button}
+              onPress={() => this.handleAnswer(false)}
+            >
+              False
+            </Text>
+            <Text style={styles.button} onPress={() => this.handleAnswer(true)}>
+              True
+            </Text>
           </View>
-          <View style={[styles.back, correctAnswer ? styles.hit : styles.miss]}>
-            <Text style={styles.question}>{question}</Text>
-            {correctAnswer ? (
-              <Text style={styles.result}>Correct!</Text>
-            ) : (
-              <Text style={styles.result}>Incorrect!</Text>
-            )}
-          </View>
-        </FlipCard>
-      </View>
+        </View>
+        <View style={[styles.back, correctAnswer ? styles.hit : styles.miss]}>
+          <Text style={styles.question}>{question}</Text>
+          {correctAnswer ? (
+            <Text style={styles.result}>Correct!</Text>
+          ) : (
+            <Text style={styles.result}>Incorrect!</Text>
+          )}
+        </View>
+      </FlipCard>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  root: {
-    padding: 20,
-    marginBottom: 5,
-  },
-
-  CardFlip: {},
+  root: { margin: 20 },
 
   front: {
     backgroundColor: 'white',

@@ -1,6 +1,6 @@
 /*
  * Card Flip by lhandel with modifications
- * https://www.npmjs.com/package/react-native-card-flip
+ * https://github.com/lhandel/react-native-card-flip/blob/master/CardFlip.js
  */
 
 import React, { Component } from 'react'
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 import { StyleSheet, Animated } from 'react-native'
 
-export default class FlipCard extends Component<Props> {
+export default class CardFlip extends Component<Props> {
   constructor(props) {
     super(props)
     this.state = {
@@ -26,7 +26,7 @@ export default class FlipCard extends Component<Props> {
     }
   }
 
-  UNSAFE_componentDidMount() {
+  componentDidMount() {
     this.setState({
       duration: this.props.duration,
       flipZoom: this.props.flipZoom,
@@ -201,7 +201,7 @@ export default class FlipCard extends Component<Props> {
     return (
       <Animated.View style={[this.props.style, scaling]}>
         <Animated.View style={cardATransform}>{sides[0]}</Animated.View>
-        <Animated.View style={[styles.backSide, cardBTransform]}>
+        <Animated.View style={[styles.backCard, cardBTransform]}>
           {sides[1]}
         </Animated.View>
       </Animated.View>
@@ -209,7 +209,7 @@ export default class FlipCard extends Component<Props> {
   }
 }
 const styles = StyleSheet.create({
-  backSide: {
+  backCard: {
     flex: 1,
     position: 'absolute',
     left: 0,
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   },
 })
 
-FlipCard.defaultProps = {
+CardFlip.defaultProps = {
   style: {},
   duration: 500,
   flipZoom: 0.09,
@@ -228,7 +228,7 @@ FlipCard.defaultProps = {
   onFlip: () => {},
 }
 
-FlipCard.propTypes = {
+CardFlip.propTypes = {
   style: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.object,
