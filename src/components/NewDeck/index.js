@@ -17,11 +17,17 @@ const Input = styled.TextInput`
 class NewDeck extends Component {
   state = { cards: [{ id: 1 }] }
 
-  moreOneCard = () => {
+  addCard = () => {
     const { cards } = this.state
     const id = cards.slice(-1)[0].id + 1
 
     this.setState({ cards: [...cards, { id }] })
+  }
+
+  deleteCard = id => {
+    const cards = this.state.cards.filter(card => card.id !== id)
+
+    this.setState({ cards })
   }
 
   render() {
@@ -32,7 +38,7 @@ class NewDeck extends Component {
         <Title>Cards</Title>
 
         {this.state.cards.map(card => (
-          <NewCard key={card.id} />
+          <NewCard id={card.id} key={card.id} handleDelete={this.deleteCard} />
         ))}
 
         <Text
@@ -40,7 +46,7 @@ class NewDeck extends Component {
             backgroundColor: '#ccc',
             padding: 30,
           }}
-          onPress={this.moreOneCard}
+          onPress={this.addCard}
         >
           More Card
         </Text>
