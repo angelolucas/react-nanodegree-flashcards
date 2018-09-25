@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { View, Text, TextInput } from 'react-native'
-import {
-  FormLabel,
-  FormInput,
-  ButtonGroup,
-  Button,
-} from 'react-native-elements'
+import { View, Text } from 'react-native'
+import { FormLabel, FormInput, Button } from 'react-native-elements'
 
 class NewCard extends Component {
   state = {
@@ -15,9 +10,18 @@ class NewCard extends Component {
     answer: '',
   }
 
+  UNSAFE_componentWillMount() {
+    if (this.props.navigation.state.params) {
+      const { question, answer } = this.props.navigation.state.params
+
+      this.setState({
+        question,
+        answer,
+      })
+    }
+  }
+
   render() {
-    const { id, handleDelete } = this.props
-    const answerOptions = ['false', 'true']
     const activeSubmit =
       this.state.question.answer !== '' && this.state.answer !== ''
         ? true
@@ -30,16 +34,16 @@ class NewCard extends Component {
           <FormInput
             multiline={true}
             onChangeText={question => this.setState({ question })}
+            value={this.state.question}
           />
         </Group>
 
         <Group>
           <FormLabel>Answer</FormLabel>
-          <ButtonGroup
-            buttons={answerOptions}
-            onPress={answer => this.setState({ answer })}
-          />
+          <Text onPress={() => this.setState({ answer: 'False' })}>False</Text>
+          <Text onPress={() => this.setState({ answer: 'True' })}>True</Text>
         </Group>
+
         {activeSubmit ? (
           <Button
             title="Add"
@@ -60,10 +64,6 @@ const Group = styled.View`
   margin-bottom: 30px;
 `
 
-NewCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  handleAdd: PropTypes.func.isRequired,
-  handleDelete: PropTypes.func.isRequired,
-}
+NewCard.propTypes = { navigation: PropTypes.func }
 
 export default NewCard

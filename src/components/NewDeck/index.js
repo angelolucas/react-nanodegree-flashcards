@@ -1,24 +1,34 @@
 import React, { Component } from 'react'
-import { ScrollView, Text } from 'react-native'
+import PropTypes from 'prop-types'
+import { ScrollView, View, Text } from 'react-native'
 import styled from 'styled-components'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
-import NewCard from './NewCard'
+import uuid from 'uuid'
 
 class NewDeck extends Component {
   state = { cards: [] }
 
-  addCard = () => {
-    const { cards } = this.state
-    const id = cards.slice(-1)[0].id + 1
+  UNSAFE_componentWillReceiveProps = next => {
+    const { question, answer } = next.navigation.state.params
 
-    this.setState({ cards: [...cards, { id }] })
+    if (question && answer) {
+      this.addCard(question, answer)
+    }
   }
 
-  componentWillReceiveProps = Next => {
-    console.log()
-  }
-  handleAdd = values => {
-    console.log(values)
+  addCard = (question, answer) => {
+    const id = uuid()
+
+    this.setState({
+      cards: [
+        ...this.state.cards,
+        {
+          id,
+          question,
+          answer,
+        },
+      ],
+    })
   }
 
   deleteCard = id => {
@@ -36,13 +46,17 @@ class NewDeck extends Component {
         </Group>
 
         <Group>
+          <FormLabel>Questions</FormLabel>
           {this.state.cards.map(card => (
-            <NewCard
-              id={card.id}
-              key={card.id}
-              handleDelete={this.deleteCard}
-              handleAdd={this.handleAddCard}
-            />
+            <ListCards
+              key={card.question}
+              onPress={() => this.props.navigation.navigate('Card', card)}
+            >
+              <View>
+                <Text>{card.question}</Text>
+                <Text>{card.answer}</Text>
+              </View>
+            </ListCards>
           ))}
           <Button
             title="Add Card"
@@ -60,16 +74,14 @@ const Group = styled.View`
   margin-bottom: 30px;
 `
 
-const Title = styled.Text`
-  margin: 20px 10px 10px;
-  font-size: 18px;
+const ListCards = styled.TouchableWithoutFeedback`
+  border-bottom-color: #ccc;
+  padding: 20px;
+  font-size: 14px;
+  justify-content: space-between;
+  flex-direction: row;
 `
 
-const Input = styled.TextInput`
-  background-color: white;
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-`
+NewDeck.propTypes = { navigation: PropTypes.func }
 
 export default NewDeck
