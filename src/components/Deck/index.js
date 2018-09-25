@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Card from './Card'
 import { ScrollView } from 'react-native'
 
-class Cards extends Component {
+class Deck extends Component {
   render() {
     return (
       <ScrollView>
@@ -31,4 +31,4 @@ class Cards extends Component {
   }
 }
 
-export default Cards
+export default Deck

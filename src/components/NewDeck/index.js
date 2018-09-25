@@ -80,6 +80,6 @@ const styles = StyleSheet.create({
   },
 })
 
-NewDeck.propTypes = { navigation: PropTypes.func }
+NewDeck.propTypes = { navigation: PropTypes.object }
 
 export default NewDeck

@@ -2,24 +2,24 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { View } from 'react-native'
 import Home from './src/components/Home'
+import Deck from './src/components/Deck'
 import NewDeck from './src/components/NewDeck'
-import Cards from './src/components/Cards'
 import NewCard from './src/components/NewDeck/NewCard'
 
 const Stack = createStackNavigator({
   Home: { screen: Home },
-  NewDeck: {
-    screen: NewDeck,
-
-    navigationOptions: () => ({ title: 'New Deck' }),
-  },
-  Cards: {
-    screen: Cards,
+  Deck: {
+    screen: Deck,
     navigationOptions: ({ navigation }) => {
       const title = navigation.state.params.title
 
       return { title }
     },
+  },
+  NewDeck: {
+    screen: NewDeck,
+
+    navigationOptions: () => ({ title: 'New Deck' }),
   },
   Card: {
     screen: NewCard,

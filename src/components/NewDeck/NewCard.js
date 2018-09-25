@@ -55,6 +55,6 @@ class NewCard extends Component {
   }
 }
 
-NewCard.propTypes = { navigation: PropTypes.func }
+NewCard.propTypes = { navigation: PropTypes.object }
 
 export default NewCard
