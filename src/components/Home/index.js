@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import { ScrollView, Text } from 'react-native'
 import Deck from './Deck'
 
 class Home extends Component {
@@ -8,10 +8,8 @@ class Home extends Component {
     const { navigate } = this.props.navigation
 
     return (
-      <Root>
-        <NewDeckButton onPress={() => navigate('NewDeck')}>
-          New Deck
-        </NewDeckButton>
+      <ScrollView>
+        <Text onPress={() => navigate('NewDeck')}>New Deck</Text>
 
         <Deck title="English" length="10" navigate={navigate} />
         <Deck title="React" length="15" navigate={navigate} />
@@ -25,21 +23,10 @@ class Home extends Component {
         <Deck title="English" length="13" navigate={navigate} />
         <Deck title="React" length="43" navigate={navigate} />
         <Deck title="Ukulele" length="20" navigate={navigate} />
-      </Root>
+      </ScrollView>
     )
   }
 }
-
-const Root = styled.ScrollView`
-  margin-bottom: 30px;
-`
-
-const NewDeckButton = styled.Text`
-  font-size: 20px;
-  padding: 10px;
-  text-align: right;
-  color: #4285f4;
-`
 
 Home.propTypes = { navigation: PropTypes.object }
 

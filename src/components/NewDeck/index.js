@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ScrollView, View, Text } from 'react-native'
-import styled from 'styled-components'
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 import uuid from 'uuid'
 
@@ -40,29 +45,25 @@ class NewDeck extends Component {
   render() {
     return (
       <ScrollView>
-        <Group>
-          <FormLabel>Title</FormLabel>
-          <FormInput />
-        </Group>
+        <FormLabel>Title</FormLabel>
+        <FormInput />
 
-        <Group>
-          <FormLabel>Questions</FormLabel>
-          {this.state.cards.map(card => (
-            <ListCards
-              key={card.question}
-              onPress={() => this.props.navigation.navigate('Card', card)}
-            >
-              <View>
-                <Text>{card.question}</Text>
-                <Text>{card.answer}</Text>
-              </View>
-            </ListCards>
-          ))}
-          <Button
-            title="Add Card"
-            onPress={() => this.props.navigation.navigate('Card')}
-          />
-        </Group>
+        <FormLabel>Questions</FormLabel>
+        {this.state.cards.map(card => (
+          <TouchableWithoutFeedback
+            key={card.id}
+            onPress={() => this.props.navigation.navigate('Card', card)}
+          >
+            <View style={styles.card}>
+              <Text>{card.question}</Text>
+              <Text>{card.answer}</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        ))}
+        <Button
+          title="Add Card"
+          onPress={() => this.props.navigation.navigate('Card')}
+        />
 
         <Button title="Create" raised />
       </ScrollView>
@@ -70,17 +71,14 @@ class NewDeck extends Component {
   }
 }
 
-const Group = styled.View`
-  margin-bottom: 30px;
-`
-
-const ListCards = styled.TouchableWithoutFeedback`
-  border-bottom-color: #ccc;
-  padding: 20px;
-  font-size: 14px;
-  justify-content: space-between;
-  flex-direction: row;
-`
+const styles = StyleSheet.create({
+  card: {
+    padding: 20,
+    fontSize: 14,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+})
 
 NewDeck.propTypes = { navigation: PropTypes.func }
 

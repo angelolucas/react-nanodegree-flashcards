@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { Text, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, TouchableWithoutFeedback } from 'react-native'
 import Swipeout from 'react-native-swipeout'
 
 class Deck extends Component {
@@ -30,45 +29,21 @@ class Deck extends Component {
     const { title, length } = this.props
 
     return (
-      <Root>
+      <View>
         <Swipeout right={this.swipeoutBtns} backgroundColor="transparent">
           <TouchableWithoutFeedback
             onPress={() => this.props.navigate('Cards', { title })}
           >
-            <Card>
-              <Title>{title}</Title>
-              <Length>{length}</Length>
-            </Card>
+            <View>
+              <Text>{title}</Text>
+              <Text>{length}</Text>
+            </View>
           </TouchableWithoutFeedback>
         </Swipeout>
-      </Root>
+      </View>
     )
   }
 }
-
-const Root = styled.View`
-  flex: 1 1 150px;
-  margin-bottom: 5px;
-`
-
-const Card = styled.View`
-  border-bottom-color: #ccc;
-  border-bottom-width: 1px;
-  flex-direction: row;
-  padding: 15px;
-  margin: 5px 10px 5px;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  justify-content: space-between;
-  z-index: 1;
-`
-const Title = styled.Text`
-  font-size: 24px;
-  margin-bottom: 5px;
-`
-const Length = styled.Text`
-  font-size: 16px;
-`
 
 Deck.propTypes = {
   title: PropTypes.string,

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { View, Text } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 
@@ -29,20 +28,16 @@ class NewCard extends Component {
 
     return (
       <View>
-        <Group>
-          <FormLabel>Question</FormLabel>
-          <FormInput
-            multiline={true}
-            onChangeText={question => this.setState({ question })}
-            value={this.state.question}
-          />
-        </Group>
+        <FormLabel>Question</FormLabel>
+        <FormInput
+          multiline={true}
+          onChangeText={question => this.setState({ question })}
+          value={this.state.question}
+        />
 
-        <Group>
-          <FormLabel>Answer</FormLabel>
-          <Text onPress={() => this.setState({ answer: 'False' })}>False</Text>
-          <Text onPress={() => this.setState({ answer: 'True' })}>True</Text>
-        </Group>
+        <FormLabel>Answer</FormLabel>
+        <Text onPress={() => this.setState({ answer: 'False' })}>False</Text>
+        <Text onPress={() => this.setState({ answer: 'True' })}>True</Text>
 
         {activeSubmit ? (
           <Button
@@ -59,10 +54,6 @@ class NewCard extends Component {
     )
   }
 }
-
-const Group = styled.View`
-  margin-bottom: 30px;
-`
 
 NewCard.propTypes = { navigation: PropTypes.func }
 
