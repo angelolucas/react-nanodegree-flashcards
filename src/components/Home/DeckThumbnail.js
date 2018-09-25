@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableWithoutFeedback } from 'react-native'
 
-class Deck extends Component {
+class DeckThumbnail extends Component {
   render() {
     const { title, length } = this.props
 
@@ -21,10 +21,10 @@ class Deck extends Component {
   }
 }
 
-Deck.propTypes = {
+DeckThumbnail.propTypes = {
   title: PropTypes.string,
   length: PropTypes.string,
   navigate: PropTypes.func,
 }
 
-export default Deck
+export default DeckThumbnail
