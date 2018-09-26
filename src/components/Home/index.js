@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, ScrollView, Text, View } from 'react-native'
 import DeckThumbnail from './DeckThumbnail'
-import { spaces } from '../../theme'
+import { Ionicons } from '@expo/vector-icons'
+import { Constants } from 'expo'
+import { spaces, colors } from '../../theme'
 
 class Home extends Component {
   render() {
@@ -10,7 +12,10 @@ class Home extends Component {
 
     return (
       <ScrollView style={styles.root}>
-        <Text onPress={() => navigate('NewDeck')}>New Deck</Text>
+        <Text style={styles.newDeckButton} onPress={() => navigate('NewDeck')}>
+          New Deck <Ionicons name="ios-arrow-forward" size={20} />
+        </Text>
+
         <View style={styles.listDeckThumbnail}>
           <DeckThumbnail title="English" length="10" navigate={navigate} />
           <DeckThumbnail title="React" length="15" navigate={navigate} />
@@ -31,6 +36,15 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   root: { padding: spaces.x1 },
+
+  newDeckButton: {
+    textAlign: 'right',
+    paddingTop: Constants.statusBarHeight,
+    padding: spaces.x1,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.details,
+  },
 
   listDeckThumbnail: {
     flexDirection: 'row',
