@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native'
 import uuid from 'uuid'
-import { TextInput, Label } from '../form'
+import { TextInput, Label } from '../customComponents'
 
 class NewDeck extends Component {
   state = { cards: [] }
