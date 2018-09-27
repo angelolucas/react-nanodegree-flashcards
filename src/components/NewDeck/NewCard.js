@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
-import TextInput from '../form/TextInput'
+import { TextInput, Label } from '../form'
 
 class NewCard extends Component {
   state = {
@@ -28,14 +28,14 @@ class NewCard extends Component {
 
     return (
       <View>
-        <Text>Question</Text>
+        <Label>Question</Label>
         <TextInput
           multiline={true}
           onChangeText={question => this.setState({ question })}
           value={this.state.question}
         />
 
-        <Text>Answer</Text>
+        <Label>Answer</Label>
         <Text onPress={() => this.setState({ answer: 'False' })}>False</Text>
         <Text onPress={() => this.setState({ answer: 'True' })}>True</Text>
 

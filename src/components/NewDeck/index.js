@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native'
 import uuid from 'uuid'
-import TextInput from '../form/TextInput'
+import { TextInput, Label } from '../form'
 
 class NewDeck extends Component {
   state = { cards: [] }
@@ -45,10 +45,10 @@ class NewDeck extends Component {
   render() {
     return (
       <ScrollView>
-        <Text>Title</Text>
+        <Label>Title</Label>
         <TextInput />
 
-        <Text>Questions</Text>
+        <Label>Questions</Label>
         {this.state.cards.map(card => (
           <TouchableWithoutFeedback
             key={card.id}
