@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native'
 import uuid from 'uuid'
-import { TextInput, Label } from '../customComponents'
+import { TextInput, Label, Button } from '../customComponents'
 
 class NewDeck extends Component {
   state = { cards: [] }
@@ -60,11 +60,11 @@ class NewDeck extends Component {
             </View>
           </TouchableWithoutFeedback>
         ))}
-        <Text onPress={() => this.props.navigation.navigate('Card')}>
+        <Button onPress={() => this.props.navigation.navigate('Card')} light>
           Add Card
-        </Text>
+        </Button>
 
-        <Text>Create</Text>
+        <Button>Create</Button>
       </ScrollView>
     )
   }

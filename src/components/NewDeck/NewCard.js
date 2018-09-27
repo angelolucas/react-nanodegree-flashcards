@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text } from 'react-native'
-import { TextInput, Label } from '../customComponents'
+import { TextInput, Label, Button } from '../customComponents'
 
 class NewCard extends Component {
   state = {
@@ -40,15 +40,15 @@ class NewCard extends Component {
         <Text onPress={() => this.setState({ answer: 'True' })}>True</Text>
 
         {activeSubmit ? (
-          <Text
+          <Button
             onPress={() =>
               this.props.navigation.navigate('NewDeck', this.state)
             }
           >
             Add
-          </Text>
+          </Button>
         ) : (
-          <Text> Add</Text>
+          <Button disabled>Add</Button>
         )}
       </View>
     )
