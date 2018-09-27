@@ -5,10 +5,10 @@ import {
   ScrollView,
   View,
   Text,
-  TextInput,
   TouchableWithoutFeedback,
 } from 'react-native'
 import uuid from 'uuid'
+import TextInput from '../form/TextInput'
 
 class NewDeck extends Component {
   state = { cards: [] }

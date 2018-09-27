@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, TextInput } from 'react-native'
+import { View, Text } from 'react-native'
+import TextInput from '../form/TextInput'
 
 class NewCard extends Component {
   state = {
