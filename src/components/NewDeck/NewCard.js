@@ -30,6 +30,7 @@ class NewCard extends Component {
       <View>
         <Label>Question</Label>
         <TextInput
+          autoFocus
           multiline={true}
           onChangeText={question => this.setState({ question })}
           value={this.state.question}

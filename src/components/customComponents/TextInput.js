@@ -4,7 +4,9 @@ import { spaces, colors } from '../../theme'
 
 class TextInput extends Component {
   render() {
-    return <ReactNativeTextInput style={styles.root} />
+    const { style, ...rest } = this.props
+
+    return <ReactNativeTextInput {...rest} style={[styles.root, style]} />
   }
 }
 

@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native'
 import uuid from 'uuid'
+import { FontAwesome } from '@expo/vector-icons'
 import { TextInput, Label, Button } from '../customComponents'
 
 class NewDeck extends Component {
@@ -46,7 +47,7 @@ class NewDeck extends Component {
     return (
       <ScrollView>
         <Label>Title</Label>
-        <TextInput />
+        <TextInput autoFocus />
 
         <Label>Questions</Label>
         {this.state.cards.map(card => (
@@ -61,9 +62,8 @@ class NewDeck extends Component {
           </TouchableWithoutFeedback>
         ))}
         <Button onPress={() => this.props.navigation.navigate('Card')} light>
-          Add Card
+          <FontAwesome name="plus" size={13} /> Add Card
         </Button>
-
         <Button>Create</Button>
       </ScrollView>
     )
