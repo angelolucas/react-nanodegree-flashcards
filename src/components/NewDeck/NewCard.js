@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
-import { FormLabel, FormInput, Button } from 'react-native-elements'
+import { View, Text, TextInput } from 'react-native'
 
 class NewCard extends Component {
   state = {
@@ -28,27 +27,27 @@ class NewCard extends Component {
 
     return (
       <View>
-        <FormLabel>Question</FormLabel>
-        <FormInput
+        <Text>Question</Text>
+        <TextInput
           multiline={true}
           onChangeText={question => this.setState({ question })}
           value={this.state.question}
         />
 
-        <FormLabel>Answer</FormLabel>
+        <Text>Answer</Text>
         <Text onPress={() => this.setState({ answer: 'False' })}>False</Text>
         <Text onPress={() => this.setState({ answer: 'True' })}>True</Text>
 
         {activeSubmit ? (
-          <Button
-            title="Add"
-            backgroundColor="#5895F0"
+          <Text
             onPress={() =>
               this.props.navigation.navigate('NewDeck', this.state)
             }
-          />
+          >
+            Add
+          </Text>
         ) : (
-          <Button title="Add" />
+          <Text> Add</Text>
         )}
       </View>
     )

@@ -5,9 +5,9 @@ import {
   ScrollView,
   View,
   Text,
+  TextInput,
   TouchableWithoutFeedback,
 } from 'react-native'
-import { FormLabel, FormInput, Button } from 'react-native-elements'
 import uuid from 'uuid'
 
 class NewDeck extends Component {
@@ -45,10 +45,10 @@ class NewDeck extends Component {
   render() {
     return (
       <ScrollView>
-        <FormLabel>Title</FormLabel>
-        <FormInput />
+        <Text>Title</Text>
+        <TextInput />
 
-        <FormLabel>Questions</FormLabel>
+        <Text>Questions</Text>
         {this.state.cards.map(card => (
           <TouchableWithoutFeedback
             key={card.id}
@@ -60,12 +60,11 @@ class NewDeck extends Component {
             </View>
           </TouchableWithoutFeedback>
         ))}
-        <Button
-          title="Add Card"
-          onPress={() => this.props.navigation.navigate('Card')}
-        />
+        <Text onPress={() => this.props.navigation.navigate('Card')}>
+          Add Card
+        </Text>
 
-        <Button title="Create" raised />
+        <Text>Create</Text>
       </ScrollView>
     )
   }
