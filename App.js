@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 import Home from './src/components/Home'
 import Deck from './src/components/Deck'
 import NewDeck from './src/components/NewDeck'
-import NewCard from './src/components/NewDeck/NewCard'
+import NewCard from './src/components/NewCard'
 
 const Stack = createStackNavigator({
   Home: {
