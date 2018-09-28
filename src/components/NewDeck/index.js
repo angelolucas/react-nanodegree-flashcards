@@ -44,24 +44,32 @@ class NewDeck extends Component {
   }
 
   render() {
+    const { cards } = this.state
+    const { navigate } = this.props.navigation
+
     return (
       <ScrollView>
         <Label>Title</Label>
-        <TextInput autoFocus />
+        <TextInput autoFocus multiline />
 
-        <Label>Questions</Label>
-        {this.state.cards.map(card => (
-          <TouchableWithoutFeedback
-            key={card.id}
-            onPress={() => this.props.navigation.navigate('Card', card)}
-          >
-            <View style={styles.card}>
-              <Text>{card.question}</Text>
-              <Text>{card.answer}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        ))}
-        <Button onPress={() => this.props.navigation.navigate('Card')} light>
+        {cards.length && (
+          <View>
+            <Label>Questions</Label>
+            {cards.map(card => (
+              <TouchableWithoutFeedback
+                key={card.id}
+                onPress={() => navigate('Card', card)}
+              >
+                <View style={styles.card}>
+                  <Text>{card.question}</Text>
+                  <Text>{card.answer}</Text>
+                </View>
+              </TouchableWithoutFeedback>
+            ))}
+          </View>
+        )}
+
+        <Button onPress={() => navigate('Card')} light>
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
         <Button>Create</Button>

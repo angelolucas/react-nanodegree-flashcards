@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     margin: spaces.x1,
     marginTop: 0,
     padding: spaces.x1,
+    paddingTop: spaces.x1,
     fontSize: 16,
   },
 })
