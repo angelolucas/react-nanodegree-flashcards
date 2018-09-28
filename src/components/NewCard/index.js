@@ -23,9 +23,7 @@ class NewCard extends Component {
 
   render() {
     const activeSubmit =
-      this.state.question.answer !== '' && this.state.answer !== ''
-        ? true
-        : false
+      this.state.question !== '' && this.state.answer !== '' ? true : false
 
     return (
       <View>

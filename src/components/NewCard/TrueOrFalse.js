@@ -4,9 +4,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { spaces, colors } from '../../theme'
 
 class TrueOrFalse extends Component {
-  state: {
-    answer: null,
-  }
+  state = { answer: '' }
 
   handleAnswer = answer => {
     this.setState({ answer })
@@ -14,12 +12,20 @@ class TrueOrFalse extends Component {
   }
 
   render() {
+    const { answer } = this.state
+
     return (
       <View style={styles.root}>
-        <Text style={styles.option} onPress={() => this.handleAnswer('true')}>
+        <Text
+          style={[styles.option, answer === 'true' && styles.active]}
+          onPress={() => this.handleAnswer('true')}
+        >
           True
         </Text>
-        <Text style={styles.option} onPress={() => this.handleAnswer('false')}>
+        <Text
+          style={[styles.option, answer === 'false' && styles.active]}
+          onPress={() => this.handleAnswer('false')}
+        >
           False
         </Text>
       </View>
@@ -39,10 +45,18 @@ const styles = StyleSheet.create({
   },
 
   option: {
+    borderRadius: 5,
     flex: 1,
     textAlign: 'center',
     fontSize: 16,
     padding: spaces.x1,
+    margin: 3,
+    overflow: 'hidden',
+  },
+
+  active: {
+    backgroundColor: colors.details,
+    color: 'white',
   },
 })
 
