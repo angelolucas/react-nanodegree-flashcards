@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { TextInput, Label, Button } from '../customComponents'
+import TrueOrFalse from './TrueOrFalse'
 
 class NewCard extends Component {
   state = {
@@ -37,8 +38,8 @@ class NewCard extends Component {
         />
 
         <Label>Answer</Label>
-        <Text onPress={() => this.setState({ answer: 'False' })}>False</Text>
-        <Text onPress={() => this.setState({ answer: 'True' })}>True</Text>
+
+        <TrueOrFalse onChange={answer => this.setState({ answer })} />
 
         {activeSubmit ? (
           <Button
