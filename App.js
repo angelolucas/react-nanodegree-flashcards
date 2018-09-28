@@ -1,10 +1,10 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { View, Text } from 'react-native'
-import Home from './src/components/Home'
-import Deck from './src/components/Deck'
-import NewDeck from './src/components/NewDeck'
-import NewCard from './src/components/NewCard'
+import Home from './components/Home'
+import Deck from './components/Deck'
+import NewDeck from './components/NewDeck'
+import NewCard from './components/NewCard'
 
 const Stack = createStackNavigator({
   Home: {
