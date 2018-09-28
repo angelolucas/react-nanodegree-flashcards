@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { spaces, colors } from '../../theme'
 
 class Button extends Component {
@@ -9,12 +9,14 @@ class Button extends Component {
     const status = disabled && 'disabled'
 
     return (
-      <Text
-        {...rest}
-        style={[style, styles.button, styles[type], styles[status]]}
-      >
-        {children}
-      </Text>
+      <View pointerEvents={disabled ? 'none' : 'auto'}>
+        <Text
+          {...rest}
+          style={[style, styles.button, styles[type], styles[status]]}
+        >
+          {children}
+        </Text>
+      </View>
     )
   }
 }
