@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Text } from 'react-native'
 import FlipCard from './FlipCard'
+import { Button } from '../customComponents'
+import { spaces, colors } from '../../theme'
 
 class Card extends Component {
   state = { correctAnswer: false }
@@ -23,23 +25,26 @@ class Card extends Component {
           <Text style={styles.question}>{question}</Text>
 
           <View style={styles.navButtons}>
-            <Text
+            <Button
               style={styles.button}
               onPress={() => this.handleAnswer(false)}
             >
               False
-            </Text>
-            <Text style={styles.button} onPress={() => this.handleAnswer(true)}>
+            </Button>
+            <Button
+              style={styles.button}
+              onPress={() => this.handleAnswer(true)}
+            >
               True
-            </Text>
+            </Button>
           </View>
         </View>
         <View style={[styles.back, correctAnswer ? styles.hit : styles.miss]}>
           <Text style={styles.question}>{question}</Text>
           {correctAnswer ? (
-            <Text style={styles.result}>Correct!</Text>
+            <Button light>Correct!</Button>
           ) : (
-            <Text style={styles.result}>Incorrect!</Text>
+            <Button light>Incorrect!</Button>
           )}
         </View>
       </FlipCard>
@@ -48,47 +53,29 @@ class Card extends Component {
 }
 
 const styles = StyleSheet.create({
-  root: { margin: 20 },
+  root: { marginBottom: spaces.x1 },
 
-  front: {
-    backgroundColor: 'white',
-    padding: 20,
-  },
+  front: { backgroundColor: 'white' },
 
   back: {
     borderRadius: 5,
-    padding: 20,
     position: 'absolute',
+    width: '100%',
   },
 
   question: {
-    fontSize: 28,
-    marginBottom: 20,
+    fontSize: 24,
+    margin: spaces.x2,
+    marginBottom: spaces.x1,
   },
 
   navButtons: { flexDirection: 'row' },
 
-  button: {
-    borderColor: 'black',
-    borderWidth: 1,
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 28,
-  },
+  button: { flex: 1 },
 
-  resultContainer: {
-    flex: 1,
-    justifyContent: 'center',
-  },
+  hit: { backgroundColor: colors.success },
 
-  result: {
-    fontSize: 38,
-    textAlign: 'center',
-  },
-
-  hit: { backgroundColor: '#87D86B' },
-
-  miss: { backgroundColor: '#DB3D35' },
+  miss: { backgroundColor: colors.danger },
 })
 
 Card.propTypes = {

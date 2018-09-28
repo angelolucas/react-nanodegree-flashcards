@@ -4,6 +4,8 @@ const colors = {
   border: '#CCC',
   details: '#C65411',
   light: '#EEEFEF',
+  success: '#87D86B',
+  danger: '#DB3D35',
 }
 
 export default colors
