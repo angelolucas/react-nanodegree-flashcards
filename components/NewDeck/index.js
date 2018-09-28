@@ -10,9 +10,13 @@ import {
 import uuid from 'uuid'
 import { FontAwesome } from '@expo/vector-icons'
 import { TextInput, Label, Button } from '../customComponents'
+import * as api from '../../utils/api'
 
 class NewDeck extends Component {
-  state = { cards: [] }
+  state = {
+    title: '',
+    cards: [],
+  }
 
   UNSAFE_componentWillReceiveProps = next => {
     const { question, answer } = next.navigation.state.params
@@ -43,14 +47,31 @@ class NewDeck extends Component {
     this.setState({ cards })
   }
 
+  handleSubmit = () => {
+    const { title, cards } = this.state
+
+    const deck = {
+      id: uuid(),
+      title,
+      cards,
+    }
+
+    api.newDeck(deck)
+  }
+
   render() {
-    const { cards } = this.state
+    const { title, cards } = this.state
     const { navigate } = this.props.navigation
 
     return (
       <ScrollView>
         <Label>Title</Label>
-        <TextInput autoFocus multiline />
+        <TextInput
+          onChangeText={title => this.setState({ title })}
+          value={title}
+          autoFocus
+          multiline
+        />
 
         {cards.length && (
           <View>
@@ -72,7 +93,10 @@ class NewDeck extends Component {
         <Button onPress={() => navigate('Card')} light>
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
-        <Button>Create</Button>
+
+        <Button disabled={!title} onPress={this.handleSubmit}>
+          Create
+        </Button>
       </ScrollView>
     )
   }
