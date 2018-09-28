@@ -37,7 +37,10 @@ class NewCard extends Component {
 
         <Label>Answer</Label>
 
-        <TrueOrFalse onChange={answer => this.setState({ answer })} />
+        <TrueOrFalse
+          value={this.state.answer}
+          onChange={answer => this.setState({ answer })}
+        />
 
         {activeSubmit ? (
           <Button

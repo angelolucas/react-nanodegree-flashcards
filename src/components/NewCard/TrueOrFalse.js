@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { spaces, colors } from '../../theme'
 
 class TrueOrFalse extends Component {
-  state = { answer: '' }
+  state = { answer: this.props.value }
 
   handleAnswer = answer => {
     this.setState({ answer })
@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
   },
 })
 
-TrueOrFalse.propTypes = { onChange: PropTypes.func }
+TrueOrFalse.propTypes = {
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+}
 
 export default TrueOrFalse
