@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { StyleSheet, ScrollView, Text, View } from 'react-native'
+import { AsyncStorage, StyleSheet, ScrollView, Text, View } from 'react-native'
 import DeckThumbnail from './DeckThumbnail'
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import { spaces, colors } from '../../theme'
+import { receiveDecks } from '../../actions'
 
 class Home extends Component {
+  UNSAFE_componentWillMount = () => {
+    AsyncStorage.getItem('store').then(data => {
+      console.log('log', this.props)
+      this.props.dispatch(receiveDecks(JSON.parse(data)))
+    })
+  }
+
   render() {
     const { navigation, decks } = this.props
     const decksAsArray = Object.keys(decks).map(key => decks[key])
@@ -59,6 +67,7 @@ const styles = StyleSheet.create({
 Home.propTypes = {
   navigation: PropTypes.object,
   decks: PropTypes.object,
+  dispatch: PropTypes.func,
 }
 
 const mapStateToProps = state => ({ decks: state })
