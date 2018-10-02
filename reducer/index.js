@@ -1,4 +1,4 @@
-import { CREATE_DECK } from '../actions'
+import { CREATE_DECK } from '../action'
 
 export default (state = {}, action) => {
   switch (action.type) {

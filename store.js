@@ -1,5 +1,11 @@
 import { createStore } from 'redux'
+import reducer from './reducer'
+import { AsyncStorage } from 'react-native'
 
-import reducers from './reducers'
+const store = createStore(reducer)
 
-export default createStore(reducers)
+store.subscribe = () => {
+  AsyncStorage.setItem('store', JSON.stringify(store.getState()))
+}
+
+export default store
