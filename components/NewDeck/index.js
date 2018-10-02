@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
   StyleSheet,
@@ -10,7 +11,8 @@ import {
 import uuid from 'uuid'
 import { FontAwesome } from '@expo/vector-icons'
 import { TextInput, Label, Button } from '../customComponents'
-import * as api from '../../utils/api'
+import { createDeck } from '../../actions'
+//import * as api from '../../utils/api'
 
 class NewDeck extends Component {
   state = {
@@ -49,14 +51,18 @@ class NewDeck extends Component {
 
   handleSubmit = () => {
     const { title, cards } = this.state
-
+    const id = uuid()
     const deck = {
-      id: uuid(),
-      title,
-      cards,
+      [id]: {
+        id,
+        title,
+        cards,
+      },
     }
 
-    api.newDeck(deck)
+    this.props.dispatch(createDeck(deck))
+
+    //api.newDeck(deck)
   }
 
   render() {
@@ -105,12 +111,14 @@ class NewDeck extends Component {
 const styles = StyleSheet.create({
   card: {
     padding: 20,
-    fontSize: 14,
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
 })
 
-NewDeck.propTypes = { navigation: PropTypes.object }
+NewDeck.propTypes = {
+  navigation: PropTypes.object,
+  dispatch: PropTypes.func,
+}
 
-export default NewDeck
+export default connect()(NewDeck)

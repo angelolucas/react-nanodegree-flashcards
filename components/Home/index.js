@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { StyleSheet, ScrollView, Text, View } from 'react-native'
 import DeckThumbnail from './DeckThumbnail'
@@ -8,26 +9,27 @@ import { spaces, colors } from '../../theme'
 
 class Home extends Component {
   render() {
-    const { navigate } = this.props.navigation
+    const { navigation, decks } = this.props
+    const decksAsArray = Object.keys(decks).map(key => decks[key])
 
     return (
       <ScrollView style={styles.root}>
-        <Text style={styles.newDeckButton} onPress={() => navigate('NewDeck')}>
+        <Text
+          style={styles.newDeckButton}
+          onPress={() => navigation.navigate('NewDeck')}
+        >
           New Deck <Ionicons name="ios-arrow-forward" size={20} />
         </Text>
 
         <View style={styles.listDeckThumbnail}>
-          <DeckThumbnail title="English" length="10" navigate={navigate} />
-          <DeckThumbnail title="React" length="15" navigate={navigate} />
-          <DeckThumbnail title="ES6" length="0" navigate={navigate} />
-          <DeckThumbnail title="Spanish" length="3" navigate={navigate} />
-          <DeckThumbnail title="React" length="8" navigate={navigate} />
-          <DeckThumbnail title="Countries" length="30" navigate={navigate} />
-          <DeckThumbnail title="UStates" length="90" navigate={navigate} />
-          <DeckThumbnail title="Ukulele" length="55" navigate={navigate} />
-          <DeckThumbnail title="English" length="13" navigate={navigate} />
-          <DeckThumbnail title="React" length="43" navigate={navigate} />
-          <DeckThumbnail title="Ukulele" length="20" navigate={navigate} />
+          {decksAsArray.map(deck => (
+            <DeckThumbnail
+              key={deck.id}
+              title={deck.title}
+              length={deck.cards.length}
+              navigate={navigation.navigate}
+            />
+          ))}
         </View>
       </ScrollView>
     )
@@ -54,6 +56,11 @@ const styles = StyleSheet.create({
   },
 })
 
-Home.propTypes = { navigation: PropTypes.object }
+Home.propTypes = {
+  navigation: PropTypes.object,
+  decks: PropTypes.object,
+}
 
-export default Home
+const mapStateToProps = state => ({ decks: state })
+
+export default connect(mapStateToProps)(Home)

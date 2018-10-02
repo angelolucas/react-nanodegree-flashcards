@@ -1,6 +1,8 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
+import { Provider } from 'react-redux'
 import { View } from 'react-native'
+import store from './store'
 import Home from './components/Home'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
@@ -33,9 +35,11 @@ const Stack = createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Stack />
-      </View>
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <Stack />
+        </View>
+      </Provider>
     )
   }
 }

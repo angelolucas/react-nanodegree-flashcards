@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
 DeckThumbnail.propTypes = {
   title: PropTypes.string,
-  length: PropTypes.string,
+  length: PropTypes.number,
   navigate: PropTypes.func,
 }
 
