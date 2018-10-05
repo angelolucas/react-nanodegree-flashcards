@@ -5,16 +5,22 @@ import { spaces, colors } from '../../theme'
 
 class DeckThumbnail extends Component {
   render() {
-    const { title, length } = this.props
+    const { id, title, cards, navigate } = this.props
 
     return (
       <View style={styles.root}>
         <TouchableWithoutFeedback
-          onPress={() => this.props.navigate('Deck', { title })}
+          onPress={() =>
+            navigate('Deck', {
+              id,
+              title,
+              cards,
+            })
+          }
         >
           <View style={styles.card}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.length}>{length}</Text>
+            <Text style={styles.length}>{cards.length}</Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -62,8 +68,9 @@ const styles = StyleSheet.create({
 })
 
 DeckThumbnail.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
-  length: PropTypes.number,
+  cards: PropTypes.array,
   navigate: PropTypes.func,
 }
 

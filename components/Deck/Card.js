@@ -27,13 +27,13 @@ class Card extends Component {
           <View style={styles.navButtons}>
             <Button
               style={styles.button}
-              onPress={() => this.handleAnswer(false)}
+              onPress={() => this.handleAnswer('false')}
             >
               False
             </Button>
             <Button
               style={styles.button}
-              onPress={() => this.handleAnswer(true)}
+              onPress={() => this.handleAnswer('true')}
             >
               True
             </Button>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
 
 Card.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.bool,
+  answer: PropTypes.string,
 }
 
 export default Card

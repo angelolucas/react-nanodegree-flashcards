@@ -9,7 +9,6 @@ export default (state = {}, action) => {
       }
 
     case RECEIVE_DECKS:
-      console.log('RECEIVE_DECKS', action.decks)
       return {
         ...state,
         ...action.decks,

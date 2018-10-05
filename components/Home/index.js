@@ -11,7 +11,6 @@ import { receiveDecks } from '../../actions'
 class Home extends Component {
   UNSAFE_componentWillMount = () => {
     AsyncStorage.getItem('store').then(data => {
-      console.log('log', this.props)
       this.props.dispatch(receiveDecks(JSON.parse(data)))
     })
   }
@@ -33,9 +32,8 @@ class Home extends Component {
           {decksAsArray.map(deck => (
             <DeckThumbnail
               key={deck.id}
-              title={deck.title}
-              length={deck.cards.length}
               navigate={navigation.navigate}
+              {...deck}
             />
           ))}
         </View>

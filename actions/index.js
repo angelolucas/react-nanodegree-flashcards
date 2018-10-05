@@ -9,7 +9,6 @@ export const createDeck = deck => {
 }
 
 export const receiveDecks = decks => {
-  console.log('receiveDecks', decks)
   return {
     type: RECEIVE_DECKS,
     decks,
