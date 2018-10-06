@@ -5,6 +5,10 @@ import Card from './Card'
 import { spaces } from '../../theme'
 
 class Deck extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return { title: navigation.state.params.title }
+  }
+
   render() {
     const { cards } = this.props.navigation.state.params
 
@@ -26,6 +30,6 @@ const styles = StyleSheet.create({
   cards: { marginBottom: spaces.x2 },
 })
 
-Deck.propTypes = { navigation: PropTypes.string }
+Deck.propTypes = { navigation: PropTypes.object }
 
 export default Deck

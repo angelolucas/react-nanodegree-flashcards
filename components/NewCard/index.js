@@ -10,6 +10,8 @@ class NewCard extends Component {
     answer: '',
   }
 
+  static navigationOptions = { title: 'New Card' }
+
   UNSAFE_componentWillMount() {
     if (this.props.navigation.state.params) {
       const { question, answer } = this.props.navigation.state.params

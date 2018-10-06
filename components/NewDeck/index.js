@@ -12,13 +12,14 @@ import uuid from 'uuid'
 import { FontAwesome } from '@expo/vector-icons'
 import { TextInput, Label, Button } from '../customComponents'
 import { createDeck } from '../../actions'
-//import * as api from '../../utils/api'
 
 class NewDeck extends Component {
   state = {
     title: '',
     cards: [],
   }
+
+  static navigationOptions = { title: 'New Deck' }
 
   UNSAFE_componentWillReceiveProps = next => {
     const { question, answer } = next.navigation.state.params

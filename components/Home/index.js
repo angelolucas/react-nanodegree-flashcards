@@ -9,6 +9,8 @@ import { spaces, colors } from '../../theme'
 import { receiveDecks } from '../../actions'
 
 class Home extends Component {
+  static navigationOptions = { header: null }
+
   UNSAFE_componentWillMount = () => {
     AsyncStorage.getItem('store').then(data => {
       this.props.dispatch(receiveDecks(JSON.parse(data)))

@@ -9,27 +9,10 @@ import NewDeck from './components/NewDeck'
 import NewCard from './components/NewCard'
 
 const Stack = createStackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: () => ({ header: null }),
-  },
-  Deck: {
-    screen: Deck,
-    navigationOptions: ({ navigation }) => {
-      const title = navigation.state.params.title
-
-      return { title }
-    },
-  },
-  NewDeck: {
-    screen: NewDeck,
-
-    navigationOptions: () => ({ title: 'New Deck' }),
-  },
-  Card: {
-    screen: NewCard,
-    navigationOptions: () => ({ title: 'New Card' }),
-  },
+  Home: { screen: Home },
+  Deck: { screen: Deck },
+  NewDeck: { screen: NewDeck },
+  Card: { screen: NewCard },
 })
 
 export default class App extends React.Component {
