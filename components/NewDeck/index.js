@@ -62,8 +62,7 @@ class NewDeck extends Component {
     }
 
     this.props.dispatch(createDeck(deck))
-
-    //api.newDeck(deck)
+    this.props.navigation.navigate('Home')
   }
 
   render() {
