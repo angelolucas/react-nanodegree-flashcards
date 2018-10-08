@@ -5,6 +5,7 @@ import { TextInput, Label, Button, TrueOrFalse } from './customComponents'
 
 class EditCard extends Component {
   state = {
+    id: '',
     question: '',
     answer: '',
   }
@@ -12,42 +13,38 @@ class EditCard extends Component {
   static navigationOptions = { title: 'Edit Card' }
 
   UNSAFE_componentWillMount() {
-    if (this.props.navigation.state.params) {
-      const { question, answer } = this.props.navigation.state.params
+    const { id, question, answer } = this.props.navigation.state.params
 
-      this.setState({
-        question,
-        answer,
-      })
-    }
+    this.setState({
+      id,
+      question,
+      answer,
+    })
   }
 
   render() {
-    const activeSubmit =
-      this.state.question !== '' && this.state.answer !== '' ? true : false
+    const { question, answer } = this.state
+    const { navigate } = this.props.navigation
+    const activeSubmit = question !== '' && answer !== '' ? true : false
 
     return (
       <View>
         <Label>Question</Label>
         <TextInput
-          autoFocus
           multiline={true}
           onChangeText={question => this.setState({ question })}
-          value={this.state.question}
+          value={question}
         />
 
         <Label>Answer</Label>
-
         <TrueOrFalse
-          value={this.state.answer}
+          value={answer}
           onChange={answer => this.setState({ answer })}
         />
 
         {activeSubmit ? (
           <Button
-            onPress={() =>
-              this.props.navigation.navigate('NewDeck', this.state)
-            }
+            onPress={() => navigate('NewDeck', { handleCard: this.state })}
           >
             Edit
           </Button>

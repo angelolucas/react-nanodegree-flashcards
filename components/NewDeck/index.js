@@ -16,31 +16,38 @@ import { createDeck } from '../../actions'
 class NewDeck extends Component {
   state = {
     title: '',
-    cards: [],
+    cards: {},
   }
 
   static navigationOptions = { title: 'New Deck' }
 
   UNSAFE_componentWillReceiveProps = next => {
-    const { question, answer } = next.navigation.state.params
+    const { handleCard } = next.navigation.state.params
 
-    if (question && answer) {
-      this.addCard(question, answer)
+    if (handleCard) {
+      const { id, question, answer } = handleCard
+
+      // Create an id in case of new card
+      if (!id) id = uuid()
+
+      this.handleCard(id, question, answer)
     }
   }
 
-  addCard = (question, answer) => {
-    const id = uuid()
+  handleCard = (id, question, answer) => {
+    const card = {
+      [id]: {
+        id,
+        question,
+        answer,
+      },
+    }
 
     this.setState({
-      cards: [
+      cards: {
         ...this.state.cards,
-        {
-          id,
-          question,
-          answer,
-        },
-      ],
+        ...card,
+      },
     })
   }
 
@@ -68,6 +75,7 @@ class NewDeck extends Component {
   render() {
     const { title, cards } = this.state
     const { navigate } = this.props.navigation
+    const cardsAsArray = Object.keys(cards).map(key => cards[key])
 
     return (
       <ScrollView>
@@ -79,10 +87,10 @@ class NewDeck extends Component {
           multiline
         />
 
-        {cards.length && (
+        {cardsAsArray.length && (
           <View>
             <Label>Questions</Label>
-            {cards.map(card => (
+            {cardsAsArray.map(card => (
               <TouchableWithoutFeedback
                 key={card.id}
                 onPress={() => navigate('EditCard', card)}

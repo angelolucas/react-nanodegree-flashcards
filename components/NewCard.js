@@ -12,8 +12,9 @@ class NewCard extends Component {
   static navigationOptions = { title: 'New Card' }
 
   render() {
-    const activeSubmit =
-      this.state.question !== '' && this.state.answer !== '' ? true : false
+    const { question, answer } = this.state
+    const { navigate } = this.props.navigation
+    const activeSubmit = question !== '' && answer !== '' ? true : false
 
     return (
       <View>
@@ -22,21 +23,18 @@ class NewCard extends Component {
           autoFocus
           multiline={true}
           onChangeText={question => this.setState({ question })}
-          value={this.state.question}
+          value={question}
         />
 
         <Label>Answer</Label>
-
         <TrueOrFalse
-          value={this.state.answer}
+          value={answer}
           onChange={answer => this.setState({ answer })}
         />
 
         {activeSubmit ? (
           <Button
-            onPress={() =>
-              this.props.navigation.navigate('NewDeck', this.state)
-            }
+            onPress={() => navigate('NewDeck', { handleCard: this.state })}
           >
             Add
           </Button>
