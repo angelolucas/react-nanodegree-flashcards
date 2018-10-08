@@ -104,7 +104,7 @@ class NewDeck extends Component {
           </View>
         )}
 
-        <Button onPress={() => navigate('NewCard')} light>
+        <Button onPress={() => navigate('NewCard')} buttonStyle="light">
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
 

@@ -4,15 +4,16 @@ import { spaces, colors } from '../../theme'
 
 class Button extends Component {
   render() {
-    const { children, style, light, disabled, ...rest } = this.props
-    const type = light ? 'light' : 'dark'
-    const status = disabled && 'disabled'
+    let { children, style, buttonStyle, disabled, ...rest } = this.props
+
+    buttonStyle = buttonStyle ? buttonStyle : 'dark'
+    disabled = disabled && 'disabled'
 
     return (
       <View pointerEvents={disabled ? 'none' : 'auto'}>
         <Text
           {...rest}
-          style={[style, styles.button, styles[type], styles[status]]}
+          style={[style, styles.button, styles[buttonStyle], styles[disabled]]}
         >
           {children}
         </Text>
@@ -38,6 +39,11 @@ const styles = StyleSheet.create({
   dark: {
     backgroundColor: colors.details,
     color: 'white',
+  },
+
+  transparent: {
+    backgroundColor: 'transparent',
+    color: colors.details,
   },
 
   disabled: { opacity: 0.5 },

@@ -42,9 +42,9 @@ class Card extends Component {
         <View style={[styles.back, correctAnswer ? styles.hit : styles.miss]}>
           <Text style={styles.question}>{question}</Text>
           {correctAnswer ? (
-            <Button light>Correct!</Button>
+            <Button buttonStyle="light">Correct!</Button>
           ) : (
-            <Button light>Incorrect!</Button>
+            <Button buttonStyle="light">Incorrect!</Button>
           )}
         </View>
       </FlipCard>
