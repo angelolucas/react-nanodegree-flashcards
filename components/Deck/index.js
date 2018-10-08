@@ -1,12 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ScrollView, View, StyleSheet } from 'react-native'
+import { Text, ScrollView, View, StyleSheet } from 'react-native'
 import Card from './Card'
 import { spaces } from '../../theme'
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => {
-    return { title: navigation.state.params.title }
+    return {
+      title: navigation.state.params.title,
+      headerRight: (
+        <Text
+          style={styles.editButton}
+          onPress={() =>
+            navigation.navigate('NewDeck', navigation.state.params)
+          }
+        >
+          edit
+        </Text>
+      ),
+    }
   }
 
   render() {
@@ -26,6 +38,8 @@ class Deck extends Component {
 
 const styles = StyleSheet.create({
   root: { padding: spaces.x1 },
+
+  editButton: { padding: 10 },
 
   cards: { marginBottom: spaces.x2 },
 })
