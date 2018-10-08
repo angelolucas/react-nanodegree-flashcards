@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
-import { TextInput, Label, Button } from '../customComponents'
-import TrueOrFalse from './TrueOrFalse'
+import { TextInput, Label, Button, TrueOrFalse } from './customComponents'
 
 class NewCard extends Component {
   state = {
@@ -11,17 +10,6 @@ class NewCard extends Component {
   }
 
   static navigationOptions = { title: 'New Card' }
-
-  UNSAFE_componentWillMount() {
-    if (this.props.navigation.state.params) {
-      const { question, answer } = this.props.navigation.state.params
-
-      this.setState({
-        question,
-        answer,
-      })
-    }
-  }
 
   render() {
     const activeSubmit =

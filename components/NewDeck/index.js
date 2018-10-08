@@ -85,7 +85,7 @@ class NewDeck extends Component {
             {cards.map(card => (
               <TouchableWithoutFeedback
                 key={card.id}
-                onPress={() => navigate('Card', card)}
+                onPress={() => navigate('EditCard', card)}
               >
                 <View style={styles.card}>
                   <Text>{card.question}</Text>
@@ -96,7 +96,7 @@ class NewDeck extends Component {
           </View>
         )}
 
-        <Button onPress={() => navigate('Card')} light>
+        <Button onPress={() => navigate('NewCard')} light>
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
 
