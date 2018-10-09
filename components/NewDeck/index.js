@@ -22,19 +22,18 @@ class NewDeck extends Component {
   static navigationOptions = { title: 'New Deck' }
 
   UNSAFE_componentWillReceiveProps = next => {
-    const { handleCard } = next.navigation.state.params
+    const handleCard = next.navigation.getParam('handleCard')
 
-    if (handleCard) {
-      const { id, question, answer } = handleCard
+    if (handleCard.action === 'update') {
+      this.updateCards(handleCard.id, handleCard.question, handleCard.answer)
+    }
 
-      // Create an id in case of new card
-      if (!id) id = uuid()
-
-      this.handleCard(id, question, answer)
+    if (handleCard.action === 'delete') {
+      this.deleteCard(handleCard.id)
     }
   }
 
-  handleCard = (id, question, answer) => {
+  updateCards = (id, question, answer) => {
     const card = {
       [id]: {
         id,
@@ -52,7 +51,9 @@ class NewDeck extends Component {
   }
 
   deleteCard = id => {
-    const cards = this.state.cards.filter(card => card.id !== id)
+    const cards = this.state.cards
+
+    delete cards[id]
 
     this.setState({ cards })
   }

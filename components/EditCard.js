@@ -22,10 +22,27 @@ class EditCard extends Component {
     })
   }
 
+  handleEdit = () => {
+    this.props.navigation.navigate('NewDeck', {
+      handleCard: {
+        action: 'update',
+        ...this.state,
+      },
+    })
+  }
+
+  handleDelete = () => {
+    this.props.navigation.navigate('NewDeck', {
+      handleCard: {
+        action: 'delete',
+        id: this.state.id,
+      },
+    })
+  }
+
   render() {
     const { question, answer } = this.state
-    const { navigate } = this.props.navigation
-    const activeSubmit = question !== '' && answer !== '' ? true : false
+    const activeSubmit = question !== '' && answer !== ''
 
     return (
       <View>
@@ -43,14 +60,14 @@ class EditCard extends Component {
         />
 
         {activeSubmit ? (
-          <Button
-            onPress={() => navigate('NewDeck', { handleCard: this.state })}
-          >
-            Edit
-          </Button>
+          <Button onPress={this.handleEdit}>Edit</Button>
         ) : (
           <Button disabled>Edit</Button>
         )}
+
+        <Button onPress={this.handleDelete} buttonStyle="transparent">
+          Delete
+        </Button>
       </View>
     )
   }
