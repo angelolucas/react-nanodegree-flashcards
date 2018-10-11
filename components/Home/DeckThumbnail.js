@@ -20,7 +20,7 @@ class DeckThumbnail extends Component {
         >
           <View style={styles.card}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.length}>{cards.length}</Text>
+            <Text style={styles.length}>{Object.keys(cards).length}</Text>
           </View>
         </TouchableWithoutFeedback>
       </View>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 DeckThumbnail.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
-  cards: PropTypes.array,
+  cards: PropTypes.object,
   navigate: PropTypes.func,
 }
 

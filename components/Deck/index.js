@@ -23,11 +23,12 @@ class Deck extends Component {
 
   render() {
     const { cards } = this.props.navigation.state.params
+    const cardsAsArray = Object.keys(cards).map(key => cards[key])
 
     return (
       <ScrollView style={styles.root}>
         <View style={styles.cards}>
-          {cards.map((card, key) => (
+          {cardsAsArray.map((card, key) => (
             <Card key={key} question={card.question} answer={card.answer} />
           ))}
         </View>
