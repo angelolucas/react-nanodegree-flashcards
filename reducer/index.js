@@ -1,4 +1,4 @@
-import { CREATE_DECK, RECEIVE_DECKS } from '../actions'
+import { CREATE_DECK, RECEIVE_DECKS, DELETE_DECK } from '../actions'
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -13,6 +13,12 @@ export default (state = {}, action) => {
         ...state,
         ...action.decks,
       }
+
+    case DELETE_DECK:
+      // https://medium.com/@tafelito/nice-article-d15fe9f6d1f1
+      const { [action.id]: whatever, ...rest } = state
+
+      return rest
 
     default:
       return state
