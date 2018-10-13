@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import { TextInput, Label, Button } from './customComponents'
-import { createDeck, deleteDeck } from '../actions'
+import { updateDecks, deleteDeck } from '../actions'
 
 class EditDeck extends Component {
   state = {
@@ -85,7 +85,7 @@ class EditDeck extends Component {
       },
     }
 
-    dispatch(createDeck(deck))
+    dispatch(updateDecks(deck))
     navigation.navigate('Home')
   }
 

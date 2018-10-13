@@ -6,14 +6,14 @@ import DeckThumbnail from './DeckThumbnail'
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import { spaces, colors } from '../../theme'
-import { receiveDecks } from '../../actions'
+import { updateDecks } from '../../actions'
 
 class Home extends Component {
   static navigationOptions = { header: null }
 
   UNSAFE_componentWillMount = () => {
     AsyncStorage.getItem('store').then(data => {
-      this.props.dispatch(receiveDecks(JSON.parse(data)))
+      this.props.dispatch(updateDecks(JSON.parse(data)))
     })
   }
 
