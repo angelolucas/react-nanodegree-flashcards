@@ -12,7 +12,7 @@ class Deck extends Component {
         <Text
           style={styles.editButton}
           onPress={() =>
-            navigation.navigate('NewDeck', navigation.state.params)
+            navigation.navigate('EditDeck', navigation.state.params)
           }
         >
           edit
