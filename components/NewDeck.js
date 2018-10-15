@@ -15,6 +15,7 @@ import { updateDecks } from '../actions'
 
 class NewDeck extends Component {
   state = {
+    id: uuid(),
     title: '',
     cards: {},
   }
@@ -59,8 +60,8 @@ class NewDeck extends Component {
   }
 
   handleSubmit = () => {
-    const { title, cards } = this.state
-    const id = uuid()
+    const { dispatch, navigation } = this.props
+    const { id, title, cards } = this.state
     const deck = {
       [id]: {
         id,
@@ -69,8 +70,8 @@ class NewDeck extends Component {
       },
     }
 
-    this.props.dispatch(updateDecks(deck))
-    this.props.navigation.navigate('Home')
+    dispatch(updateDecks(deck))
+    navigation.navigate('Home')
   }
 
   render() {
