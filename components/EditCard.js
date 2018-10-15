@@ -13,7 +13,7 @@ class EditCard extends Component {
   static navigationOptions = { title: 'Edit Card' }
 
   UNSAFE_componentWillMount() {
-    const { id, question, answer } = this.props.navigation.state.params
+    const { id, question, answer } = this.props.navigation.state.params.card
 
     this.setState({
       id,
@@ -23,12 +23,10 @@ class EditCard extends Component {
   }
 
   handleEdit = () => {
-    this.props.navigation.navigate('NewDeck', {
-      handleCard: {
-        action: 'update',
-        ...this.state,
-      },
-    })
+    const { goBack, state } = this.props.navigation
+
+    goBack()
+    state.params.updateCards({ ...this.state })
   }
 
   handleDelete = () => {

@@ -25,21 +25,18 @@ class NewDeck extends Component {
   UNSAFE_componentWillReceiveProps = next => {
     const handleCard = next.navigation.getParam('handleCard')
 
-    if (handleCard.action === 'update') {
-      this.updateCards(handleCard.id, handleCard.question, handleCard.answer)
-    }
-
     if (handleCard.action === 'delete') {
       this.deleteCard(handleCard.id)
     }
   }
 
   updateCards = data => {
+    const { id, question, answer } = data
     const card = {
-      [data.id]: {
-        id: data.id,
-        question: data.question,
-        answer: data.answer,
+      [id]: {
+        id,
+        question,
+        answer,
       },
     }
 
@@ -95,7 +92,12 @@ class NewDeck extends Component {
             {cardsAsArray.map(card => (
               <TouchableWithoutFeedback
                 key={card.id}
-                onPress={() => navigate('EditCard', card)}
+                onPress={() =>
+                  navigate('EditCard', {
+                    card,
+                    updateCards: this.updateCards,
+                  })
+                }
               >
                 <View style={styles.card}>
                   <Text>{card.question}</Text>

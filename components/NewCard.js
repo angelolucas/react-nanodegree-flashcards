@@ -14,10 +14,10 @@ class NewCard extends Component {
   static navigationOptions = { title: 'New Card' }
 
   handleNewCard = () => {
-    const { navigation } = this.props
+    const { goBack, state } = this.props.navigation
 
-    navigation.goBack()
-    navigation.state.params.updateCards({ ...this.state })
+    goBack()
+    state.params.updateCards({ ...this.state })
   }
 
   render() {
