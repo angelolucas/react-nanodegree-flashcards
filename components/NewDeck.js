@@ -33,12 +33,12 @@ class NewDeck extends Component {
     }
   }
 
-  updateCards = (id, question, answer) => {
+  updateCards = data => {
     const card = {
-      [id]: {
-        id,
-        question,
-        answer,
+      [data.id]: {
+        id: data.id,
+        question: data.question,
+        answer: data.answer,
       },
     }
 
@@ -105,7 +105,10 @@ class NewDeck extends Component {
           </View>
         )}
 
-        <Button onPress={() => navigate('NewCard')} buttonStyle="light">
+        <Button
+          onPress={() => navigate('NewCard', { updateCards: this.updateCards })}
+          buttonStyle="light"
+        >
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
 

@@ -14,12 +14,10 @@ class NewCard extends Component {
   static navigationOptions = { title: 'New Card' }
 
   handleNewCard = () => {
-    this.props.navigation.navigate('NewDeck', {
-      handleCard: {
-        action: 'update',
-        ...this.state,
-      },
-    })
+    const { navigation } = this.props
+
+    navigation.goBack()
+    navigation.state.params.updateCards({ ...this.state })
   }
 
   render() {
