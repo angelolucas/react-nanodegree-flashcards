@@ -11,8 +11,8 @@ class ListItem extends Component {
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.card}>
-          <Text style={styles.text}>{title}</Text>
-          <Text style={styles.text}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.right}>
             {right}
             <View style={styles.icon}>
               <Ionicons name="ios-arrow-forward" size={20} />
@@ -32,9 +32,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+    width: '100%',
   },
 
-  text: { fontSize: 16 },
+  title: {
+    flex: 1,
+    fontSize: 16,
+    paddingRight: 10,
+  },
+
+  right: { fontSize: 16 },
 
   icon: {
     height: 16,
