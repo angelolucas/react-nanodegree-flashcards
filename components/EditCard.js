@@ -30,12 +30,10 @@ class EditCard extends Component {
   }
 
   handleDelete = () => {
-    this.props.navigation.navigate('NewDeck', {
-      handleCard: {
-        action: 'delete',
-        id: this.state.id,
-      },
-    })
+    const { goBack, state } = this.props.navigation
+
+    goBack()
+    state.params.deleteCard(this.state.id)
   }
 
   render() {
@@ -60,7 +58,7 @@ class EditCard extends Component {
         {activeSubmit ? (
           <Button onPress={this.handleEdit}>Edit</Button>
         ) : (
-          <Button disabled>Edit</Button>
+          <Button disabled>Save</Button>
         )}
 
         <Button onPress={this.handleDelete} buttonStyle="transparent">

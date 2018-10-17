@@ -22,14 +22,6 @@ class NewDeck extends Component {
 
   static navigationOptions = { title: 'New Deck' }
 
-  UNSAFE_componentWillReceiveProps = next => {
-    const handleCard = next.navigation.getParam('handleCard')
-
-    if (handleCard.action === 'delete') {
-      this.deleteCard(handleCard.id)
-    }
-  }
-
   updateCards = data => {
     const { id, question, answer } = data
     const card = {
@@ -96,6 +88,7 @@ class NewDeck extends Component {
                   navigate('EditCard', {
                     card,
                     updateCards: this.updateCards,
+                    deleteCard: this.deleteCard,
                   })
                 }
               >

@@ -31,19 +31,8 @@ class EditDeck extends Component {
     })
   }
 
-  UNSAFE_componentWillReceiveProps = next => {
-    const handleCard = next.navigation.getParam('handleCard')
-
-    if (handleCard.action === 'update') {
-      this.updateCards(handleCard.id, handleCard.question, handleCard.answer)
-    }
-
-    if (handleCard.action === 'delete') {
-      this.deleteCard(handleCard.id)
-    }
-  }
-
-  updateCards = (id, question, answer) => {
+  updateCards = data => {
+    const { id, question, answer } = data
     const card = {
       [id]: {
         id,
@@ -109,7 +98,13 @@ class EditDeck extends Component {
             {cardsAsArray.map(card => (
               <TouchableWithoutFeedback
                 key={card.id}
-                onPress={() => navigate('EditCard', card)}
+                onPress={() =>
+                  navigate('EditCard', {
+                    card,
+                    updateCards: this.updateCards,
+                    deleteCard: this.deleteCard,
+                  })
+                }
               >
                 <View style={styles.card}>
                   <Text>{card.question}</Text>
@@ -120,12 +115,15 @@ class EditDeck extends Component {
           </View>
         )}
 
-        <Button onPress={() => navigate('NewCard')} buttonStyle="light">
+        <Button
+          onPress={() => navigate('NewCard', { updateCards: this.updateCards })}
+          buttonStyle="light"
+        >
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
 
         <Button disabled={!title} onPress={this.handleSubmit}>
-          Edit Deck
+          Save
         </Button>
 
         <Button onPress={this.handleDeleteDeck} buttonStyle="transparent">
