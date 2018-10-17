@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { AsyncStorage, StyleSheet, ScrollView, Text, View } from 'react-native'
-import DeckThumbnail from './DeckThumbnail'
 import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import { spaces, colors } from '../../theme'
 import { updateDecks } from '../../actions'
+import DeckThumbnail from './DeckThumbnail'
 
 class Home extends Component {
   static navigationOptions = { header: null }

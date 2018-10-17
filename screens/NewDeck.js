@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import uuid from 'uuid'
 import { FontAwesome } from '@expo/vector-icons'
-import { TextInput, Label, Button } from './customComponents'
+import { TextInput, Label, Button } from '../components'
 import { updateDecks } from '../actions'
 
 class NewDeck extends Component {

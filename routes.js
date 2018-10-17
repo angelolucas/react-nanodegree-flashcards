@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation'
-import Home from './components/Home'
-import Deck from './components/Deck'
-import NewDeck from './components/NewDeck'
-import EditDeck from './components/EditDeck'
-import NewCard from './components/NewCard'
-import EditCard from './components/EditCard'
+import Home from './screens/Home'
+import Deck from './screens/Deck'
+import NewDeck from './screens/NewDeck'
+import EditDeck from './screens/EditDeck'
+import NewCard from './screens/NewCard'
+import EditCard from './screens/EditCard'
 
 export default createStackNavigator({
   Home: { screen: Home },

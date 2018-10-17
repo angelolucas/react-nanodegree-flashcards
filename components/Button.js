@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { spaces, colors } from '../../theme'
+import { spaces, colors } from '../theme'
 
 class Button extends Component {
   render() {

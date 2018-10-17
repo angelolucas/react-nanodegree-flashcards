@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet } from 'react-native'
-import { spaces } from '../../theme'
+import { spaces } from '../theme'
 
 class TextInput extends Component {
   render() {

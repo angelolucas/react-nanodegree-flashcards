@@ -1,23 +1,39 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
-import uuid from 'uuid'
-import { TextInput, Label, Button, TrueOrFalse } from './customComponents'
+import { TextInput, Label, Button, TrueOrFalse } from '../components'
 
-class NewCard extends Component {
+class EditCard extends Component {
   state = {
-    id: uuid(),
+    id: '',
     question: '',
     answer: '',
   }
 
-  static navigationOptions = { title: 'New Card' }
+  static navigationOptions = { title: 'Edit Card' }
 
-  handleNewCard = () => {
+  UNSAFE_componentWillMount() {
+    const { id, question, answer } = this.props.navigation.state.params.card
+
+    this.setState({
+      id,
+      question,
+      answer,
+    })
+  }
+
+  handleEdit = () => {
     const { goBack, state } = this.props.navigation
 
     goBack()
     state.params.updateCards({ ...this.state })
+  }
+
+  handleDelete = () => {
+    const { goBack, state } = this.props.navigation
+
+    goBack()
+    state.params.deleteCard(this.state.id)
   }
 
   render() {
@@ -28,7 +44,6 @@ class NewCard extends Component {
       <View>
         <Label>Question</Label>
         <TextInput
-          autoFocus
           multiline={true}
           onChangeText={question => this.setState({ question })}
           value={question}
@@ -41,15 +56,19 @@ class NewCard extends Component {
         />
 
         {activeSubmit ? (
-          <Button onPress={this.handleNewCard}>Add</Button>
+          <Button onPress={this.handleEdit}>Edit</Button>
         ) : (
-          <Button disabled>Add</Button>
+          <Button disabled>Save</Button>
         )}
+
+        <Button onPress={this.handleDelete} buttonStyle="transparent">
+          Delete
+        </Button>
       </View>
     )
   }
 }
 
-NewCard.propTypes = { navigation: PropTypes.object }
+EditCard.propTypes = { navigation: PropTypes.object }
 
-export default NewCard
+export default EditCard

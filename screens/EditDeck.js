@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
-import { TextInput, Label, Button } from './customComponents'
+import { TextInput, Label, Button } from '../components'
 import { updateDecks, deleteDeck } from '../actions'
 
 class EditDeck extends Component {

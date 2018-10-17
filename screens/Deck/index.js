@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Text, ScrollView, View, StyleSheet } from 'react-native'
-import Card from './Card'
 import { spaces } from '../../theme'
+import Card from './Card'
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => {

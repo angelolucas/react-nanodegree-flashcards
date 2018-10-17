@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Text } from 'react-native'
-import FlipCard from './FlipCard'
-import { Button } from '../customComponents'
 import { spaces, colors } from '../../theme'
+import { Button } from '../../components'
+import FlipCard from './FlipCard'
 
 class Card extends Component {
   state = { correctAnswer: false }
