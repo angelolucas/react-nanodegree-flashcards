@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { ScrollView } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
-import { TextInput, Label, Button } from '../components'
+import { TextInput, Label, Button, ListItem } from '../components'
 import { updateDecks, deleteDeck } from '../actions'
 
 class EditDeck extends Component {
@@ -65,7 +59,6 @@ class EditDeck extends Component {
   handleSubmit = () => {
     const { id, title, cards } = this.state
     const { dispatch, navigation } = this.props
-
     const deck = {
       [id]: {
         id,
@@ -91,13 +84,14 @@ class EditDeck extends Component {
           value={title}
           multiline
         />
-
         {cardsAsArray.length && (
-          <View>
+          <React.Fragment>
             <Label>Questions</Label>
             {cardsAsArray.map(card => (
-              <TouchableWithoutFeedback
+              <ListItem
                 key={card.id}
+                title={card.question}
+                right={card.answer}
                 onPress={() =>
                   navigate('EditCard', {
                     card,
@@ -105,27 +99,19 @@ class EditDeck extends Component {
                     deleteCard: this.deleteCard,
                   })
                 }
-              >
-                <View style={styles.card}>
-                  <Text>{card.question}</Text>
-                  <Text>{card.answer}</Text>
-                </View>
-              </TouchableWithoutFeedback>
+              />
             ))}
-          </View>
+          </React.Fragment>
         )}
-
         <Button
           onPress={() => navigate('NewCard', { updateCards: this.updateCards })}
           buttonStyle="light"
         >
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
-
         <Button disabled={!title} onPress={this.handleSubmit}>
           Save
         </Button>
-
         <Button onPress={this.handleDeleteDeck} buttonStyle="transparent">
           Delete
         </Button>
@@ -133,14 +119,6 @@ class EditDeck extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  card: {
-    padding: 20,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-})
 
 EditDeck.propTypes = {
   navigation: PropTypes.object,

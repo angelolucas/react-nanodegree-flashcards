@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { ScrollView, View, Text, TouchableWithoutFeedback } from 'react-native'
 import uuid from 'uuid'
 import { FontAwesome } from '@expo/vector-icons'
-import { TextInput, Label, Button } from '../components'
+import { TextInput, Label, Button, ListItem } from '../components'
 import { updateDecks } from '../actions'
 
 class NewDeck extends Component {
@@ -77,13 +71,14 @@ class NewDeck extends Component {
           autoFocus
           multiline
         />
-
         {cardsAsArray.length && (
-          <View>
+          <React.Fragment>
             <Label>Questions</Label>
             {cardsAsArray.map(card => (
-              <TouchableWithoutFeedback
+              <ListItem
                 key={card.id}
+                title={card.question}
+                right={card.answer}
                 onPress={() =>
                   navigate('EditCard', {
                     card,
@@ -91,23 +86,16 @@ class NewDeck extends Component {
                     deleteCard: this.deleteCard,
                   })
                 }
-              >
-                <View style={styles.card}>
-                  <Text>{card.question}</Text>
-                  <Text>{card.answer}</Text>
-                </View>
-              </TouchableWithoutFeedback>
+              />
             ))}
-          </View>
+          </React.Fragment>
         )}
-
         <Button
           onPress={() => navigate('NewCard', { updateCards: this.updateCards })}
           buttonStyle="light"
         >
           <FontAwesome name="plus" size={13} /> Add Card
         </Button>
-
         <Button disabled={!title} onPress={this.handleSubmit}>
           Create
         </Button>
@@ -115,14 +103,6 @@ class NewDeck extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  card: {
-    padding: 20,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-})
 
 NewDeck.propTypes = {
   navigation: PropTypes.object,
