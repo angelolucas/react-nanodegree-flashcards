@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Text, ScrollView, View, StyleSheet } from 'react-native'
 import { spaces } from '../../theme'
+import ProgressBar from './ProgressBar'
 import Card from './Card'
 
 class Deck extends Component {
@@ -21,18 +22,47 @@ class Deck extends Component {
     }
   }
 
+  state = {
+    progress: 0,
+    hits: 0,
+    miss: 0,
+  }
+
+  updateProgress = correctAnswer => {
+    let progress = this.state.progress + 1
+
+    if (correctAnswer) {
+      const hits = this.state.hits + 1
+      this.setState({ progress, hits })
+    } else {
+      const miss = this.state.miss + 1
+      this.setState({ progress, miss })
+    }
+  }
+
   render() {
     const { cards } = this.props.navigation.state.params
     const cardsAsArray = Object.keys(cards).map(key => cards[key])
 
     return (
-      <ScrollView style={styles.root}>
-        <View style={styles.cards}>
-          {cardsAsArray.map((card, key) => (
-            <Card key={key} question={card.question} answer={card.answer} />
-          ))}
-        </View>
-      </ScrollView>
+      <React.Fragment>
+        <ProgressBar
+          progress={this.state.progress}
+          steps={Object.keys(cards).length}
+        />
+        <ScrollView style={styles.root}>
+          <View style={styles.cards}>
+            {cardsAsArray.map((card, key) => (
+              <Card
+                key={key}
+                question={card.question}
+                answer={card.answer}
+                updateProgress={this.updateProgress}
+              />
+            ))}
+          </View>
+        </ScrollView>
+      </React.Fragment>
     )
   }
 }
@@ -40,7 +70,7 @@ class Deck extends Component {
 const styles = StyleSheet.create({
   root: { padding: spaces.x1 },
 
-  editButton: { padding: 10 },
+  editButton: { padding: spaces.x1 },
 
   cards: { marginBottom: spaces.x2 },
 })

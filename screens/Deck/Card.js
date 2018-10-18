@@ -13,6 +13,7 @@ class Card extends Component {
 
     this.setState({ correctAnswer })
     this.card.flip()
+    this.props.updateProgress(correctAnswer)
   }
 
   render() {
