@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Text } from 'react-native'
 import { spaces, colors } from '../../theme'
-import { Button } from '../../components'
-import FlipCard from './FlipCard'
+import { Button, FlipCard } from '../../components'
 
 class Card extends Component {
   state = { userAnswer: false }
