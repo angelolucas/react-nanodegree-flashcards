@@ -17,8 +17,8 @@ export default class CardFlip extends Component<Props> {
       sides: [],
       progress: new Animated.Value(0),
       rotation: new Animated.ValueXY({
-        x: 0,
-        y: 0,
+        x: 50,
+        y: 50,
       }),
       zoom: new Animated.Value(0),
       rotateOrientation: '',
@@ -43,37 +43,15 @@ export default class CardFlip extends Component<Props> {
   }
 
   flip() {
-    if (this.props.flipDirection == 'y') {
-      this.flipY()
-    } else {
-      this.flipX()
-    }
-  }
-
-  flipY() {
-    const { side } = this.state
-
-    this.setState({
-      side: side === 0 ? 1 : 0,
-      rotateOrientation: 'y',
-    })
-    this._flipTo({
-      x: 0,
-      y: side === 0 ? 100 : 0,
-    })
-  }
-
-  flipX() {
     const { side } = this.state
 
     this.setState({
       side: side === 0 ? 1 : 0,
       rotateOrientation: 'x',
     })
-
     this._flipTo({
-      x: side === 0 ? 100 : 0,
-      y: 0,
+      y: 50,
+      x: side === 0 ? 100 : 50,
     })
   }
 
@@ -81,6 +59,7 @@ export default class CardFlip extends Component<Props> {
     const { duration, rotation, progress, zoom, side } = this.state
 
     this.props.onFlip(side === 0 ? 1 : 0)
+    this.props.onFlipStart(side === 0 ? 1 : 0)
     Animated.parallel([
       Animated.timing(progress, {
         toValue: side === 0 ? 100 : 0,
@@ -104,18 +83,19 @@ export default class CardFlip extends Component<Props> {
         duration: duration,
         useNativeDriver: true,
       }),
-    ]).start()
+    ]).start(() => {
+      this.props.onFlipEnd(side === 0 ? 1 : 0)
+    })
   }
 
   getCardATransformation() {
+    //0, 50, 100
     const { progress, rotation, side, rotateOrientation } = this.state
-
     const sideAOpacity = progress.interpolate({
       inputRange: [50, 51],
       outputRange: [100, 0],
       extrapolate: 'clamp',
     })
-
     const sideATransform = {
       opacity: sideAOpacity,
       zIndex: side === 0 ? 1 : 0,
@@ -124,8 +104,8 @@ export default class CardFlip extends Component<Props> {
 
     if (rotateOrientation === 'x') {
       const aXRotation = rotation.x.interpolate({
-        inputRange: [0, 100],
-        outputRange: ['0deg', '180deg'],
+        inputRange: [0, 50, 100, 150],
+        outputRange: ['-180deg', '0deg', '180deg', '0deg'],
         extrapolate: 'clamp',
       })
 
@@ -133,8 +113,8 @@ export default class CardFlip extends Component<Props> {
     } else {
       // cardA Y-rotation
       const aYRotation = rotation.y.interpolate({
-        inputRange: [0, 100],
-        outputRange: ['0deg', '180deg'],
+        inputRange: [0, 50, 100, 150],
+        outputRange: ['-180deg', '0deg', '180deg', '0deg'],
         extrapolate: 'clamp',
       })
 
@@ -145,13 +125,11 @@ export default class CardFlip extends Component<Props> {
 
   getCardBTransformation() {
     const { progress, rotation, side, rotateOrientation } = this.state
-
     const sideBOpacity = progress.interpolate({
       inputRange: [50, 51],
       outputRange: [0, 100],
       extrapolate: 'clamp',
     })
-
     const sideBTransform = {
       opacity: sideBOpacity,
       zIndex: side === 0 ? 0 : 1,
@@ -160,8 +138,8 @@ export default class CardFlip extends Component<Props> {
 
     if (rotateOrientation === 'x') {
       const bXRotation = rotation.x.interpolate({
-        inputRange: [0, 100],
-        outputRange: ['360deg', '180deg'],
+        inputRange: [0, 50, 100, 150],
+        outputRange: ['0deg', '-180deg', '-360deg', '180deg'],
         extrapolate: 'clamp',
       })
 
@@ -169,8 +147,8 @@ export default class CardFlip extends Component<Props> {
     } else {
       // cardB Y-rotation
       const bYRotation = rotation.y.interpolate({
-        inputRange: [0, 100],
-        outputRange: ['180deg', '0deg'],
+        inputRange: [0, 50, 100, 150],
+        outputRange: ['0deg', '180deg', '0deg', '-180deg'],
         extrapolate: 'clamp',
       })
 
@@ -182,20 +160,16 @@ export default class CardFlip extends Component<Props> {
   render() {
     const { zoom, sides } = this.state
     const { flipZoom } = this.props
-
     // Handle cardA transformation
     const cardATransform = this.getCardATransformation()
-
     // Handle cardB transformation
     const cardBTransform = this.getCardBTransformation()
-
     // Handle cardPopup
     const cardZoom = zoom.interpolate({
       inputRange: [0, 100],
       outputRange: [1, 1 + flipZoom],
       extrapolate: 'clamp',
     })
-
     const scaling = { transform: [{ scale: cardZoom }] }
 
     return (
@@ -226,6 +200,8 @@ CardFlip.defaultProps = {
   flipDirection: 'y',
   perspective: 800,
   onFlip: () => {},
+  onFlipStart: () => {},
+  onFlipEnd: () => {},
 }
 
 CardFlip.propTypes = {
@@ -238,5 +214,7 @@ CardFlip.propTypes = {
   flipZoom: PropTypes.number,
   flipDirection: PropTypes.string,
   onFlip: PropTypes.func,
+  onFlipEnd: PropTypes.func,
+  onFlipStart: PropTypes.func,
   perspective: PropTypes.number,
 }
