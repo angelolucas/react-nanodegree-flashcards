@@ -6,6 +6,13 @@ import ProgressBar from './ProgressBar'
 import Card from './Card'
 
 class Deck extends Component {
+  state = {
+    cards: {},
+    progress: 0,
+    hits: 0,
+    miss: 0,
+  }
+
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params.title,
@@ -22,16 +29,16 @@ class Deck extends Component {
     }
   }
 
-  state = {
-    progress: 0,
-    hits: 0,
-    miss: 0,
+  componentWillMount() {
+    const { cards } = this.props.navigation.state.params
+
+    this.setState({ cards })
   }
 
-  updateProgress = correctAnswer => {
+  handleCardAnswer = userAnswer => {
     let progress = this.state.progress + 1
 
-    if (correctAnswer) {
+    if (userAnswer) {
       const hits = this.state.hits + 1
       this.setState({ progress, hits })
     } else {
@@ -41,7 +48,7 @@ class Deck extends Component {
   }
 
   render() {
-    const { cards } = this.props.navigation.state.params
+    const { cards } = this.state
     const cardsAsArray = Object.keys(cards).map(key => cards[key])
 
     return (
@@ -56,8 +63,8 @@ class Deck extends Component {
               <Card
                 key={key}
                 question={card.question}
-                answer={card.answer}
-                updateProgress={this.updateProgress}
+                correctAnswer={card.answer}
+                onCardAnswer={this.handleCardAnswer}
               />
             ))}
           </View>

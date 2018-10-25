@@ -6,18 +6,19 @@ import { Button } from '../../components'
 import FlipCard from './FlipCard'
 
 class Card extends Component {
-  state = { correctAnswer: false }
+  state = { userAnswer: false }
 
-  handleAnswer = choice => {
-    const correctAnswer = this.props.answer === choice ? true : false
+  handleAnswer = answer => {
+    const { correctAnswer, onCardAnswer } = this.props
+    const userAnswer = correctAnswer === answer ? true : false
 
-    this.setState({ correctAnswer })
+    this.setState({ userAnswer })
     this.card.flip()
-    this.props.updateProgress(correctAnswer)
+    onCardAnswer(userAnswer)
   }
 
   render() {
-    const { correctAnswer } = this.state
+    const { userAnswer } = this.state
     const { question } = this.props
 
     return (
@@ -40,9 +41,9 @@ class Card extends Component {
             </Button>
           </View>
         </View>
-        <View style={[styles.back, correctAnswer ? styles.hit : styles.miss]}>
+        <View style={[styles.back, userAnswer ? styles.hit : styles.miss]}>
           <Text style={styles.question}>{question}</Text>
-          {correctAnswer ? (
+          {userAnswer ? (
             <Button buttonStyle="light">Correct!</Button>
           ) : (
             <Button buttonStyle="light">Incorrect!</Button>
