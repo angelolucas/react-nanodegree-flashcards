@@ -21,7 +21,11 @@ class Card extends Component {
     const { question } = this.props
 
     return (
-      <FlipCard style={styles.root} ref={card => (this.card = card)}>
+      <FlipCard
+        style={styles.root}
+        ref={card => (this.card = card)}
+        flipDirection="x"
+      >
         <View style={styles.front}>
           <Text style={styles.question}>{question}</Text>
 
