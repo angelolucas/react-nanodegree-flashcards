@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Text } from 'react-native'
 import { spaces, colors } from '../../theme'
-import { Button, FlipCard } from '../../components'
+import { Button } from '../../components'
 
 class Card extends Component {
   handleAnswer = userAnswer => {
@@ -12,15 +12,11 @@ class Card extends Component {
   }
 
   render() {
-    const { question, userAnswer } = this.props.card
-
+    const { question, userAnswer, answer } = this.props.card
+    console.log(userAnswer)
     return (
-      <View>
-        <FlipCard
-          style={styles.root}
-          ref={card => (this.card = card)}
-          flipDirection="x"
-        >
+      <View style={styles.root}>
+        {!userAnswer ? (
           <View style={styles.front}>
             <Text style={styles.question}>{question}</Text>
 
@@ -39,29 +35,32 @@ class Card extends Component {
               </Button>
             </View>
           </View>
-          <View style={[styles.back, userAnswer ? styles.hit : styles.miss]}>
+        ) : (
+          <View
+            style={[
+              styles.back,
+              userAnswer === answer ? styles.hit : styles.miss,
+            ]}
+          >
             <Text style={styles.question}>{question}</Text>
-            {userAnswer ? (
+            {userAnswer === answer ? (
               <Button buttonStyle="light">Correct!</Button>
             ) : (
               <Button buttonStyle="light">Incorrect!</Button>
             )}
           </View>
-        </FlipCard>
+        )}
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  root: { marginBottom: spaces.x1 },
-
-  front: { backgroundColor: 'white' },
-
-  back: {
+  root: {
+    backgroundColor: 'white',
     borderRadius: 5,
-    position: 'absolute',
-    width: '100%',
+    marginBottom: spaces.x1,
+    overflow: 'hidden',
   },
 
   question: {
