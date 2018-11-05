@@ -5,54 +5,50 @@ import { spaces, colors } from '../../theme'
 import { Button, FlipCard } from '../../components'
 
 class Card extends Component {
-  state = { userAnswer: false }
+  handleAnswer = userAnswer => {
+    const { card, onChange } = this.props
 
-  handleAnswer = answer => {
-    const { correctAnswer, onCardAnswer } = this.props
-    const userAnswer = correctAnswer === answer ? true : false
-
-    this.setState({ userAnswer })
-    this.card.flip()
-    onCardAnswer(userAnswer)
+    onChange(card, userAnswer)
   }
 
   render() {
-    const { userAnswer } = this.state
-    const { question } = this.props
+    const { question, userAnswer } = this.props.card
 
     return (
-      <FlipCard
-        style={styles.root}
-        ref={card => (this.card = card)}
-        flipDirection="x"
-      >
-        <View style={styles.front}>
-          <Text style={styles.question}>{question}</Text>
+      <View>
+        <FlipCard
+          style={styles.root}
+          ref={card => (this.card = card)}
+          flipDirection="x"
+        >
+          <View style={styles.front}>
+            <Text style={styles.question}>{question}</Text>
 
-          <View style={styles.navButtons}>
-            <Button
-              style={styles.button}
-              onPress={() => this.handleAnswer('false')}
-            >
-              False
-            </Button>
-            <Button
-              style={styles.button}
-              onPress={() => this.handleAnswer('true')}
-            >
-              True
-            </Button>
+            <View style={styles.navButtons}>
+              <Button
+                style={styles.button}
+                onPress={() => this.handleAnswer('false')}
+              >
+                False
+              </Button>
+              <Button
+                style={styles.button}
+                onPress={() => this.handleAnswer('true')}
+              >
+                True
+              </Button>
+            </View>
           </View>
-        </View>
-        <View style={[styles.back, userAnswer ? styles.hit : styles.miss]}>
-          <Text style={styles.question}>{question}</Text>
-          {userAnswer ? (
-            <Button buttonStyle="light">Correct!</Button>
-          ) : (
-            <Button buttonStyle="light">Incorrect!</Button>
-          )}
-        </View>
-      </FlipCard>
+          <View style={[styles.back, userAnswer ? styles.hit : styles.miss]}>
+            <Text style={styles.question}>{question}</Text>
+            {userAnswer ? (
+              <Button buttonStyle="light">Correct!</Button>
+            ) : (
+              <Button buttonStyle="light">Incorrect!</Button>
+            )}
+          </View>
+        </FlipCard>
+      </View>
     )
   }
 }

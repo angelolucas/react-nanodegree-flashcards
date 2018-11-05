@@ -35,8 +35,21 @@ class Deck extends Component {
     this.setState({ cards })
   }
 
-  handleCardAnswer = userAnswer => {
-    let progress = this.state.progress + 1
+  handleCardAnswer = (card, userAnswer) => {
+    console.log(this.state)
+    console.log(card, userAnswer)
+
+    this.setState({
+      cards: {
+        ...this.state.cards,
+        [card.id]: {
+          ...card,
+          userAnswer,
+        },
+      },
+    })
+
+    /*let progress = this.state.progress + 1
 
     if (userAnswer) {
       const hits = this.state.hits + 1
@@ -44,7 +57,7 @@ class Deck extends Component {
     } else {
       const miss = this.state.miss + 1
       this.setState({ progress, miss })
-    }
+    }*/
   }
 
   render() {
@@ -60,12 +73,7 @@ class Deck extends Component {
         <ScrollView style={styles.root}>
           <View style={styles.cards}>
             {cardsAsArray.map((card, key) => (
-              <Card
-                key={key}
-                question={card.question}
-                correctAnswer={card.answer}
-                onCardAnswer={this.handleCardAnswer}
-              />
+              <Card key={key} card={card} onChange={this.handleCardAnswer} />
             ))}
           </View>
         </ScrollView>
