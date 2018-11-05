@@ -60,6 +60,12 @@ class Deck extends Component {
     }*/
   }
 
+  handleReset = () => {
+    const { cards } = this.props.navigation.state.params
+
+    this.setState({ cards })
+  }
+
   render() {
     const { cards } = this.state
     const cardsAsArray = Object.keys(cards).map(key => cards[key])
