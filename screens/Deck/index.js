@@ -83,26 +83,27 @@ class Deck extends Component {
     const { cards, hits, miss, progress } = this.state
     const cardsAsArray = Object.keys(cards).map(key => cards[key])
     const steps = Object.keys(cards).length
-    const showScoreboard = progress === steps
+    const notFinished = progress < steps
 
     return (
       <React.Fragment>
         <ProgressBar progress={progress} steps={steps} />
-        <ScrollView style={styles.root}>
-          <View style={styles.cards}>
-            {cardsAsArray.map((card, key) => (
-              <Card key={key} card={card} onChange={this.handleCardAnswer} />
-            ))}
-            {showScoreboard && (
-              <Scoreboard
-                hits={hits}
-                miss={miss}
-                onPressReset={this.handleReset}
-                navigation={this.props.navigation}
-              />
-            )}
-          </View>
-        </ScrollView>
+        {notFinished ? (
+          <ScrollView style={styles.root}>
+            <View style={styles.cards}>
+              {cardsAsArray.map((card, key) => (
+                <Card key={key} card={card} onChange={this.handleCardAnswer} />
+              ))}
+            </View>
+          </ScrollView>
+        ) : (
+          <Scoreboard
+            hits={hits}
+            miss={miss}
+            onPressReset={this.handleReset}
+            navigation={this.props.navigation}
+          />
+        )}
       </React.Fragment>
     )
   }

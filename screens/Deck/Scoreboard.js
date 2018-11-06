@@ -13,10 +13,10 @@ const Scoreboard = ({ hits, miss, onPressReset, navigation }) => (
     </View>
     <View style={styles.buttons}>
       <Button buttonStyle="light" onPress={() => navigation.navigate('Home')}>
-        Back to Deck
+        ↩️ Back to Deck
       </Button>
       <Button buttonStyle="light" onPress={onPressReset}>
-        Restart Quiz
+        🔄 Restart Quiz
       </Button>
     </View>
   </View>
@@ -24,7 +24,8 @@ const Scoreboard = ({ hits, miss, onPressReset, navigation }) => (
 
 const styles = StyleSheet.create({
   root: {
-    height: 700,
+    justifyContent: 'center',
+    height: '100%',
   },
 
   score: {
