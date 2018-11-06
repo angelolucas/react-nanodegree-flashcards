@@ -9,10 +9,10 @@ const Scoreboard = ({ hits, miss, navigation }) => (
   <View style={styles.root}>
     <View style={styles.score}>
       <Text style={styles.hits}>
-        <MaterialCommunityIcons name="thumb-up" size={50} /> 3
+        <MaterialCommunityIcons name="thumb-up" size={50} /> {hits}
       </Text>
       <Text style={styles.miss}>
-        <MaterialCommunityIcons name="thumb-down" size={50} /> 2
+        <MaterialCommunityIcons name="thumb-down" size={50} /> {miss}
       </Text>
     </View>
     <View style={styles.buttons}>

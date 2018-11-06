@@ -4,6 +4,7 @@ import { Text, ScrollView, View, StyleSheet } from 'react-native'
 import { spaces } from '../../theme'
 import ProgressBar from './ProgressBar'
 import Card from './Card'
+import Scoreboard from './Scoreboard'
 
 class Deck extends Component {
   state = {
@@ -36,9 +37,11 @@ class Deck extends Component {
   }
 
   handleCardAnswer = (card, userAnswer) => {
-    console.log(this.state)
-    console.log(card, userAnswer)
+    this.applyCardAnswer(card, userAnswer)
+    this.updateProgress(card, userAnswer)
+  }
 
+  applyCardAnswer = (card, userAnswer) => {
     this.setState({
       cards: {
         ...this.state.cards,
@@ -48,16 +51,21 @@ class Deck extends Component {
         },
       },
     })
+  }
 
-    /*let progress = this.state.progress + 1
+  updateProgress = (card, userAnswer) => {
+    const correctAnswer = userAnswer === card.answer
+    let progress = this.state.progress + 1
 
-    if (userAnswer) {
+    if (correctAnswer) {
       const hits = this.state.hits + 1
+
       this.setState({ progress, hits })
     } else {
       const miss = this.state.miss + 1
+
       this.setState({ progress, miss })
-    }*/
+    }
   }
 
   handleReset = () => {
@@ -67,20 +75,26 @@ class Deck extends Component {
   }
 
   render() {
-    const { cards } = this.state
+    const { cards, hits, miss, progress } = this.state
     const cardsAsArray = Object.keys(cards).map(key => cards[key])
+    const steps = Object.keys(cards).length
+    const showScoreboard = progress === steps
 
     return (
       <React.Fragment>
-        <ProgressBar
-          progress={this.state.progress}
-          steps={Object.keys(cards).length}
-        />
+        <ProgressBar progress={progress} steps={steps} />
         <ScrollView style={styles.root}>
           <View style={styles.cards}>
             {cardsAsArray.map((card, key) => (
               <Card key={key} card={card} onChange={this.handleCardAnswer} />
             ))}
+            {showScoreboard && (
+              <Scoreboard
+                hits={hits}
+                miss={miss}
+                navigation={this.props.navigation}
+              />
+            )}
           </View>
         </ScrollView>
       </React.Fragment>

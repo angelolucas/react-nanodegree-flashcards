@@ -13,7 +13,8 @@ class Card extends Component {
 
   render() {
     const { question, userAnswer, answer } = this.props.card
-    console.log(userAnswer)
+    const correctAnswer = userAnswer === answer
+
     return (
       <View style={styles.root}>
         {!userAnswer ? (
@@ -36,14 +37,9 @@ class Card extends Component {
             </View>
           </View>
         ) : (
-          <View
-            style={[
-              styles.back,
-              userAnswer === answer ? styles.hit : styles.miss,
-            ]}
-          >
+          <View style={[styles.back, correctAnswer ? styles.hit : styles.miss]}>
             <Text style={styles.question}>{question}</Text>
-            {userAnswer === answer ? (
+            {correctAnswer ? (
               <Button buttonStyle="light">Correct!</Button>
             ) : (
               <Button buttonStyle="light">Incorrect!</Button>
