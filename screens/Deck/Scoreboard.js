@@ -8,12 +8,8 @@ import { colors } from '../../theme'
 const Scoreboard = ({ hits, miss, onPressReset, navigation }) => (
   <View style={styles.root}>
     <View style={styles.score}>
-      <Text style={styles.hits}>
-        <MaterialCommunityIcons name="thumb-up" size={50} /> {hits}
-      </Text>
-      <Text style={styles.miss}>
-        <MaterialCommunityIcons name="thumb-down" size={50} /> {miss}
-      </Text>
+      <Text style={styles.hits}>👍🏽 {hits}</Text>
+      <Text style={styles.miss}>👎🏽 {miss}</Text>
     </View>
     <View style={styles.buttons}>
       <Button buttonStyle="light" onPress={() => navigation.navigate('Home')}>

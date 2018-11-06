@@ -39,11 +39,10 @@ class Card extends Component {
         ) : (
           <View style={[styles.back, correctAnswer ? styles.hit : styles.miss]}>
             <Text style={styles.question}>{question}</Text>
-            {correctAnswer ? (
-              <Button buttonStyle="light">Correct!</Button>
-            ) : (
-              <Button buttonStyle="light">Incorrect!</Button>
-            )}
+            <Button buttonStyle="light">
+              {correctAnswer ? '👍🏽 ' : '👎🏽 '}
+              The answer is {answer}!
+            </Button>
           </View>
         )}
       </View>
