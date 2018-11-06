@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Button } from '../../components'
 import { colors } from '../../theme'
 
-const Scoreboard = ({ hits, miss, navigation }) => (
+const Scoreboard = ({ hits, miss, onPressReset, navigation }) => (
   <View style={styles.root}>
     <View style={styles.score}>
       <Text style={styles.hits}>
@@ -17,7 +17,10 @@ const Scoreboard = ({ hits, miss, navigation }) => (
     </View>
     <View style={styles.buttons}>
       <Button buttonStyle="light" onPress={() => navigation.navigate('Home')}>
-        Back to decks
+        Back to Deck
+      </Button>
+      <Button buttonStyle="light" onPress={onPressReset}>
+        Restart Quiz
       </Button>
     </View>
   </View>

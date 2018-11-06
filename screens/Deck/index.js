@@ -71,7 +71,12 @@ class Deck extends Component {
   handleReset = () => {
     const { cards } = this.props.navigation.state.params
 
-    this.setState({ cards })
+    this.setState({
+      cards,
+      progress: 0,
+      hits: 0,
+      miss: 0,
+    })
   }
 
   render() {
@@ -92,6 +97,7 @@ class Deck extends Component {
               <Scoreboard
                 hits={hits}
                 miss={miss}
+                onPressReset={this.handleReset}
                 navigation={this.props.navigation}
               />
             )}
