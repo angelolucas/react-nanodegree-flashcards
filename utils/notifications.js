@@ -25,8 +25,8 @@ export function setLocalNotification() {
 
             Notifications.scheduleLocalNotificationAsync(
               {
-                title: 'Log your stats!',
-                body: "👋 don't forget to log your stats for today!",
+                title: '🧠 Flashcards',
+                body: "Don't forget to take your quiz today",
                 ios: {
                   sound: true,
                 },
