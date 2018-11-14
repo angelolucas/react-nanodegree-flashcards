@@ -12,6 +12,7 @@ class Deck extends Component {
     progress: 0,
     hits: 0,
     miss: 0,
+    finished: false,
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -55,6 +56,7 @@ class Deck extends Component {
 
   updateProgress = (card, userAnswer) => {
     const correctAnswer = userAnswer === card.answer
+    const steps = Object.keys(this.state.cards).length
     let progress = this.state.progress + 1
 
     if (correctAnswer) {
@@ -66,6 +68,14 @@ class Deck extends Component {
 
       this.setState({ progress, miss })
     }
+
+    if (steps === progress) {
+      this.handleFinalization()
+    }
+  }
+
+  handleFinalization = () => {
+    this.setState({ finished: true })
   }
 
   handleReset = () => {
@@ -76,19 +86,26 @@ class Deck extends Component {
       progress: 0,
       hits: 0,
       miss: 0,
+      finished: false,
     })
   }
 
   render() {
-    const { cards, hits, miss, progress } = this.state
+    const { cards, hits, miss, progress, finished } = this.state
     const cardsAsArray = Object.keys(cards).map(key => cards[key])
     const steps = Object.keys(cards).length
-    const notFinished = progress < steps
 
     return (
       <React.Fragment>
         <ProgressBar progress={progress} steps={steps} />
-        {notFinished ? (
+        {finished ? (
+          <Scoreboard
+            hits={hits}
+            miss={miss}
+            onPressReset={this.handleReset}
+            navigation={this.props.navigation}
+          />
+        ) : (
           <ScrollView style={styles.root}>
             <View style={styles.cards}>
               {cardsAsArray.map((card, key) => (
@@ -96,13 +113,6 @@ class Deck extends Component {
               ))}
             </View>
           </ScrollView>
-        ) : (
-          <Scoreboard
-            hits={hits}
-            miss={miss}
-            onPressReset={this.handleReset}
-            navigation={this.props.navigation}
-          />
         )}
       </React.Fragment>
     )
