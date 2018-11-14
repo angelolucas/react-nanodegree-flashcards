@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Text, ScrollView, View, StyleSheet } from 'react-native'
 import { spaces } from '../../theme'
+import {
+  clearLocalNotification,
+  setLocalNotification,
+} from '../../utils/notifications'
 import ProgressBar from './ProgressBar'
 import Card from './Card'
 import Scoreboard from './Scoreboard'
@@ -75,6 +79,8 @@ class Deck extends Component {
   }
 
   handleFinalization = () => {
+    clearLocalNotification().then(setLocalNotification)
+
     this.setState({ finished: true })
   }
 
