@@ -3,8 +3,13 @@ import { Provider } from 'react-redux'
 import { View } from 'react-native'
 import store from './store'
 import Routes from './routes'
+import { setLocalNotification } from './utils/notifications'
 
-export default class App extends React.Component {
+class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -15,3 +20,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+export default App

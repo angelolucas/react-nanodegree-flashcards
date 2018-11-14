@@ -1,3 +1,6 @@
+import { AsyncStorage } from 'react-native'
+import { Notifications, Permissions } from 'expo'
+
 const NOTIFICATION_KEY = 'UdaciFitness:notifications'
 
 export function clearLocalNotification() {
