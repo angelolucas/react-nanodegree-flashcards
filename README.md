@@ -1,4 +1,4 @@
-# Flash Cards
+# 🧠 Flash Cards
 Udacity React Nanodegree.
 
 ## Install and Start
@@ -6,11 +6,6 @@ Udacity React Nanodegree.
 $ npm install
 $ npm start
 ```
-
-Then open http://localhost:3000 to see your app.
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
 
 ## Stack
 - [Create React Native App][crna]: Create React Native apps with no build configuration.
@@ -20,6 +15,11 @@ You will also see any lint errors in the console.
 ### Code formatting and linting
 Code linting and formatting happens automatically on staged files whenever a Git commit is attempted.
 You might want to integrate it in your favorite editor. Read the section on [Editor Integration][prettier-editor] on the Prettier GitHub page.
+
+## Tested Platforms
+  - iPhone 7 with iOS 12.1
+
+## Screenshots
 
 [crna]: https://github.com/facebook/create-react-app
 [redux]: https://redux.js.org
