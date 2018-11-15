@@ -8,9 +8,9 @@ export const updateDecks = decks => {
   }
 }
 
-export const deleteDecks = id => {
+export const deleteDeck = id => {
   return {
-    type: DELETE_DECKS,
+    type: DELETE_DECK,
     id,
   }
 }
